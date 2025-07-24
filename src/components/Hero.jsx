@@ -50,14 +50,6 @@ const Hero = () => {
                   >
                     Begin Learning Today <i className="bi bi-chevron-right"></i>
                   </button>
-                  <button
-                    className={`btn play-btn-circle ${
-                      heroInView ? "animate-fade-in-up" : ""
-                    }`}
-                    style={{ animationDelay: "0.4s" }}
-                  >
-                    <i className="bi bi-play-fill"></i>
-                  </button>
                 </div>
               </div>
             </div>
