@@ -1,0 +1,77 @@
+/* --- Footer Section Styling --- */
+
+.footer-section {
+  /* This creates the transparent green background */
+  background-color: rgba(200, 230, 201, 0.7); /* Light green with 70% opacity */
+  padding: 4rem 0 2rem 0;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  margin-top: 4rem;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+}
+
+.footer-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #34495e;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #f57c4a;
+}
+
+.footer-main-content {
+  margin-bottom: 3rem;
+}
+
+/* --- Bottom Row Styling --- */
+.footer-bottom-row {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 2rem;
+}
+
+.footer-bottom-title {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #2c3e50;
+  margin-bottom: 0.25rem;
+}
+
+.footer-bottom-text {
+  font-size: 0.9rem;
+  color: #34495e;
+  margin: 0;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 767.98px) {
+  .footer-title {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .footer-bottom-row {
+    text-align: center;
+  }
+  .footer-bottom-row .col-md-4 {
+    text-align: center !important;
+  }
+}

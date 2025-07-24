@@ -1,0 +1,137 @@
+/* --- Popular Courses Section Styling --- */
+
+.popular-courses-section {
+  padding: 6rem 0;
+  background-color: #fff7f0; /* Warm background from Specialty section */
+  overflow: hidden;
+}
+
+/* --- Elements start hidden for animation --- */
+.popular-courses-header-container,
+.header-divider,
+.course-card-wrapper {
+  opacity: 0;
+}
+
+/* --- Header Styling (with scoped class names) --- */
+.popular-courses-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+}
+
+.popular-courses-subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #f57c4a;
+  white-space: nowrap;
+  margin-right: 2rem;
+}
+
+.popular-courses-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2f2f2f;
+  margin: 0;
+  text-align: left; /* Ensures text wraps from the left */
+  flex-basis: 33.33%; /* Roughly the width of one card */
+  flex-shrink: 0; /* Prevents it from shrinking */
+}
+
+.header-divider {
+  border-top: 1px solid #f57c4a;
+  margin-bottom: 3rem;
+}
+
+/* --- Course Card Styling --- */
+.course-card {
+  background-color: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.course-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.course-card-image-container {
+  width: 100%;
+  padding-top: 66.66%; /* 3:2 Aspect Ratio */
+  position: relative;
+}
+
+.course-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.course-card-body {
+  padding: 1.5rem;
+}
+
+.course-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.course-card-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #6c757d;
+  flex-wrap: wrap; /* Allows stats to wrap on small screens */
+  gap: 10px;
+}
+
+.course-card-stats span {
+  display: flex;
+  align-items: center;
+}
+
+.course-card-stats .bi {
+  margin-right: 5px;
+  color: #f57c4a;
+}
+
+/* --- ANIMATION --- */
+.animate-slide-up {
+  animation: slideUpAndFade 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 767.98px) {
+  .popular-courses-header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .popular-courses-title {
+    flex-basis: 100%; /* Title takes full width on mobile */
+    font-size: 1.8rem;
+    margin-top: 0.5rem;
+  }
+}

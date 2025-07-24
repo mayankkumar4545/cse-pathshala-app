@@ -1,0 +1,184 @@
+/* --- Testimonials Section Styling --- */
+
+.testimonials-section {
+  padding: 6rem 0;
+  background-color: #fff7f0; /* Warm off-white background */
+  overflow: hidden;
+}
+
+/* --- Elements start hidden for animation --- */
+.testimonials-header-block, /* Updated selector */
+.testimonial-card-wrapper {
+  opacity: 0;
+}
+
+/* --- Updated Header Block --- */
+.testimonials-header-block {
+  /* Updated selector */
+  margin-bottom: 4rem;
+}
+
+.testimonials-title {
+  /* Updated selector */
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1e2a4c;
+}
+
+.testimonials-section .highlight-text {
+  color: #f57c4a; /* Brand orange highlight */
+}
+
+.testimonials-subtitle {
+  /* Updated selector */
+  font-size: 1.1rem;
+  color: #5a6472;
+  margin-top: 0.5rem;
+}
+
+/* --- Testimonial Card Styling (already specific) --- */
+.testimonial-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.testimonial-quote-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 8rem;
+  font-weight: 900;
+  color: #f3dbc6;
+  line-height: 1;
+  z-index: 1;
+  user-select: none;
+}
+
+.testimonial-header {
+  margin-bottom: 1rem;
+}
+
+.avatar-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.testimonial-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+.play-icon-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #f57c4a;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.play-icon-overlay:hover {
+  background-color: #e56b3a;
+}
+
+.testimonial-body {
+  position: relative;
+  z-index: 2;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.testimonial-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #4a4a4a;
+  margin-bottom: 1.5rem;
+}
+
+.author-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.author-role {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin: 0;
+}
+
+/* --- DIRECTIONAL ANIMATIONS --- */
+.animate-slide-up {
+  animation: slideUpAndFade 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+.animate-slide-left {
+  animation: slideLeftAndFade 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+.animate-slide-right {
+  animation: slideRightAndFade 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* --- KEYFRAMES --- */
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideLeftAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slideRightAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 991.98px) {
+  .testimonial-card-wrapper {
+    margin-bottom: 1.5rem;
+  }
+  .animate-slide-left,
+  .animate-slide-right {
+    animation-name: slideUpAndFade;
+  }
+}

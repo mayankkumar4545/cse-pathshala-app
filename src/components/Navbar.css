@@ -1,0 +1,94 @@
+/* --- Updated Navbar Styling --- */
+
+/* Main Navbar Container */
+.bright-nest-navbar {
+  background-color: #fff7f0;
+  padding: 1rem 0;
+  font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+}
+
+/* Logo Styling */
+.navbar-brand {
+  color: #f57c4a !important; /* Vibrant orange color */
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Navigation Links */
+.nav-link {
+  color: #4a4a4a !important; /* Dark charcoal color */
+  font-weight: 500;
+  margin: 0 0.5rem;
+  position: relative; /* Needed for the underline */
+  padding-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+/* Underline for the ACTIVE link only */
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 3px;
+  background-color: #f57c4a; /* Orange underline */
+  border-radius: 2px;
+}
+
+/* Login Button */
+.login-btn {
+  background-color: #fdefe7 !important;
+  color: #f57c4a !important;
+  border: 1px solid #f57c4a !important;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.5rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #fce0d4 !important;
+  transform: translateY(-2px);
+}
+
+/* Enroll Now Button */
+.enroll-now-btn {
+  background-color: #f57c4a !important;
+  color: white !important;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(245, 124, 74, 0.3);
+}
+
+.enroll-now-btn:hover {
+  background-color: #e56b3a !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(245, 124, 74, 0.4);
+}
+
+/* Responsive styles for the Navbar */
+@media (max-width: 991.98px) {
+  .navbar-nav {
+    /* Add spacing on top when collapsed */
+    padding-top: 1rem;
+    text-align: center;
+  }
+  .nav-link {
+    margin-bottom: 0.5rem;
+  }
+  .auth-buttons {
+    /* Center buttons and add margin */
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}

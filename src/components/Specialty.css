@@ -1,0 +1,153 @@
+/* --- Specialty Section Styling --- */
+
+.specialty-section {
+  padding: 6rem 0;
+  background-color: #fff7f0;
+  overflow: hidden; /* Important for preventing scrollbars during animation */
+}
+
+/* --- Elements start hidden before animation --- */
+.specialty-subtitle,
+.specialty-title,
+.specialty-card-wrapper {
+  opacity: 0;
+}
+
+/* --- Title Styling --- */
+.specialty-title-container {
+  margin-bottom: 4rem;
+}
+
+.specialty-subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f57c4a;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.specialty-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2f2f2f;
+  max-width: 600px;
+}
+
+/* --- Specialty Card Styling --- */
+.specialty-card {
+  text-align: left;
+  padding: 1rem;
+}
+
+.specialty-icon-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #f57c4a;
+  transition: transform 0.3s ease;
+}
+
+.specialty-card:hover .specialty-icon-circle {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.specialty-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1e2a4c;
+  margin-bottom: 0.75rem;
+}
+
+.specialty-card-text {
+  font-size: 0.9rem;
+  color: #2f2f2f;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Icon Background Color Variants */
+.icon-bg-yellow {
+  background-color: #ffe8c5;
+}
+.icon-bg-pink {
+  background-color: #ffdce5;
+}
+.icon-bg-green {
+  background-color: #e4f1e1;
+}
+.icon-bg-blue {
+  background-color: #e2f0fc;
+}
+
+/* --- NEW MULTI-DIRECTIONAL ANIMATIONS --- */
+
+/* 1. Animation for Subtitle (from Top) */
+.animate-slide-down {
+  animation: slideInDown 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 2. Animation for Main Title (from Left) */
+.animate-slide-left {
+  animation: slideInLeft 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 0.2s; /* Slight delay after subtitle */
+}
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 3. Animation for Cards (from Bottom-Right) */
+.animate-slide-up-right {
+  animation: slideInUpFromRight 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+@keyframes slideInUpFromRight {
+  from {
+    opacity: 0;
+    transform: translate(50px, 50px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+  .specialty-title,
+  .specialty-subtitle,
+  .specialty-card {
+    text-align: center;
+  }
+  .specialty-icon-circle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .specialty-title {
+    max-width: 100%;
+    font-size: 2.2rem;
+  }
+  .specialty-card-wrapper {
+    margin-bottom: 1.5rem;
+  }
+}
