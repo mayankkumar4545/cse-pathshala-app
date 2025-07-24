@@ -4,8 +4,8 @@
   /* This creates the transparent green background */
   background-color: rgba(200, 230, 201, 0.7); /* Light green with 70% opacity */
   padding: 4rem 0 2rem 0;
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
   margin-top: 4rem;
   font-family: "Poppins", sans-serif;
   color: #333;
