@@ -4,8 +4,10 @@ import "./Footer.css"; // We'll create this CSS file next
 const footerData = {
   columns: [
     {
-      title: "Educational",
-      links: ["Copyright@2023 Ratul"],
+      title: "Cse Pathshala",
+      links: [
+        "Your Journey to mastering Computer Science starts here. Join our community of learners and excel in your career.",
+      ],
     },
     {
       title: "About",
@@ -13,20 +15,20 @@ const footerData = {
     },
     {
       title: "Quick Link",
-      links: ["Facebook", "Twitter", "Instagram", "Linkedin", "Pinterest"],
+      links: ["Facebook", "Twitter", "Instagram", "Linkedin"],
     },
     {
-      title: "Our Service",
+      title: "Resources",
+      links: ["Student Reviews", "FAQ", "Blog"],
+    },
+    {
+      title: "Contact Us",
       links: [
-        "Freelancing Courses",
-        "Language Courses",
-        "Skills & IT Courses",
-        "Creative Courses",
+        "Email: support@csepathshala.com",
+        "Calling: 7889100907",
+        "WhatsApp: +91 7889153352",
+        "Address: Csl/16 sector 25 jvsas market noida 201301",
       ],
-    },
-    {
-      title: "Company",
-      links: ["Coursera", "Udemy", "Duolingo", "Skillshare"],
     },
     {
       title: "Policy",

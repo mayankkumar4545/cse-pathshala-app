@@ -6,27 +6,33 @@ import "./Testimonials.css"; // Make sure to use the updated CSS below
 const testimonialsData = [
   {
     avatar: "https://placehold.co/100x100/EFEFEF/333?text=OB",
-    name: "Olivia Bennett",
-    role: "Grade 3 Student",
-    text: "I love the science games and stories! They make learning feel like an adventure, not homework. I used to be scared to answer questions in class, but now I feel excited to share what I know. I even made my own volcano at home.",
+    name: "Ankit Sharma",
+    role: "B.Tech CSE 3rd year",
+    text: "I have joined CSE Pathshala to develop my Data Structures and Algorithms and it was the correct choice of my academic life. The explanations are as crystal-clear as one can ever get, and the mentors are genuinely concerned with the way you progress. I aced my dream internship at Amazon, and all this with the help of structured learning path!",
   },
   {
     avatar: "https://placehold.co/100x100/EFEFEF/333?text=YK",
-    name: "Yuna Kim",
-    role: "Parent",
-    text: "This platform is a lifesaver for working parents. I no longer feel guilty about not being able to help with homework. The lessons are interactive, the feedback is instant, and my child has become much more confident and curious.",
+    name: "Mehak Arora",
+    role: "2nd Year Student, Tier-3 College",
+    text: "When I came to a less-known college, I always felt a step backward. CSE Pathshala had altered the situation. Live sessions, weekly challenges and one-on-one mentor support made me have the confidence to take part in national level hackathons. It actually brought quality tech ed to a person like me.",
   },
   {
     avatar: "https://placehold.co/100x100/EFEFEF/333?text=S",
-    name: "Stephanie",
-    role: "Parent",
-    text: "Before I started using this platform, I thought math was the worst subject ever. Now, the puzzles and quizzes make it feel like a fun challenge. I finally understand fractions and even help my classmates sometimes.",
+    name: " Raj Patel ",
+    role: "an aspiring Full Stack Developer",
+    text: "I did not have any background when I joined their Full Stack Web Development course. Now I have full-fledged projects, my own site deployed, and I am even engaged in freelancing. All the difference was the practical action and real-world orientation.",
   },
   {
     avatar: "https://placehold.co/100x100/EFEFEF/333?text=LA",
-    name: "Liam Anderson",
-    role: "Parent",
-    text: "This platform is a lifesaver for working parents. I no longer feel guilty about not sitting with my daughter all day. The lessons are interactive, and she's become much more confident and curious. It's amazing to see her love learning again.",
+    name: "Shruti Nair ",
+    role: "GATE CS Aspirant",
+    text: "I felt very daunting preparing to take GATE until I discovered CSE Pathshala. They have gold courses on GATE. The simulated tests, small theory notes and clarification of doubts are incomparable. And then I could never imagine that online prep can become so intimate and productive!",
+  },
+  {
+    avatar: "https://placehold.co/100x100/EFEFEF/333?text=LA",
+    name: "Vivek Raj",
+    role: "Career Switcher (Mechanical Engineer to Software developer)",
+    text: "I have spent 2 years working in an organisation in a non-technological position but choose to move to software. CSE pathshala did not only teach coding, they trained to think like a programmer. They provided mentorship to me in careers, and now I work as a junior developer at a startup that I look up to.",
   },
 ];
 

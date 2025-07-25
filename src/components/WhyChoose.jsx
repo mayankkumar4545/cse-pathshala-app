@@ -19,7 +19,7 @@ const AnimatedHeader = () => {
           }`}
         >
           <h2 className="section-title">
-            Why Choose <span className="bright-sub-head">BrightNest?</span>
+            Why Choose <span className="bright-sub-head"> CSE PATHSHALA?</span>
           </h2>
         </div>
       </div>
@@ -67,14 +67,16 @@ const AnimatedText = () => {
         }`}
       >
         <p>
-          BrightNest is an interactive learning platform that supports
-          children's academic and emotional development. We teach core subjects
-          like Math, Science, and Language Arts through engaging, fun
-          activities, while also fostering creativity with art, music, writing,
-          and craft. Our platform emphasizes emotional growth, helping children
-          build confidence, resilience, and critical thinking skills. With
-          personalized lessons, BrightNest ensures every child learns and
-          thrives at their own pace.
+          CSE Pathshala is not a learning platform and it is your tech career
+          launchpad. Being a learner who wants to learn the basics of coding, a
+          competitive exam or those advanced topics like DSA, Artificial
+          Intelligence or Web Development, we have it all for every level, and
+          curated content is student friendly. <br />
+          Judged by actual projects, personal doubt-breaking, special doubts
+          classes, reverse assessments, and superior mentors, CSE Pathshala sets
+          you not to learn but to progress. Be part of a community, grow, code,
+          and leave a legacy as a creator of future technology leaders. <br />
+          Select CSE Pathshala – because your success in tech begins here.
         </p>
       </div>
     </div>

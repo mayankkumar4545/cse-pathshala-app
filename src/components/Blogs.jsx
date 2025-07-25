@@ -6,18 +6,18 @@ import "./Blogs.css"; // We'll create this CSS file next
 const blogData = [
   {
     image: "https://placehold.co/600x400/E0E0E0/333?text=Blog+1",
-    title: "How Children Learn Best Through Everyday Play",
-    text: "Discover how simple, playful activities help build critical thinking, creativity, and communication skills.",
+    title: "Mastering DSA: The Building Blocks of Every Great Developer",
+    text: "Unlock the core concepts of Data Structures and Algorithms with practical examples and student-friendly tips. Learn how mastering DSA can sharpen your logic, improve your coding interviews, and open doors to top tech roles.",
   },
   {
     image: "https://placehold.co/600x400/E0E0E0/333?text=Blog+2",
-    title: "Study Habits That Help Kids Stay Focused",
-    text: "Build daily routines that improve focus, reduce distractions, and make learning feel more enjoyable.",
+    title: "How to Stay Consistent in Coding While Managing College Pressure",
+    text: "Balancing academics and coding practice is tough — but doable. Discover effective strategies for time management, focused learning, and building a sustainable tech routine without burnout.",
   },
   {
     image: "https://placehold.co/600x400/E0E0E0/333?text=Blog+3",
-    title: "Creating a Productive Home Learning Environment",
-    text: "Design a calm, engaging space at home to support focus, structure, and consistent learning.",
+    title: "Why Every CSE Student Should Build Real-World Projects Early",
+    text: "Theory matters, but projects prove your skills. This blog explores how working on real-world applications can accelerate your growth, boost confidence, and make your resume stand out — even before you graduate.",
   },
 ];
 

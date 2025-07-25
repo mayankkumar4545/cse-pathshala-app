@@ -34,7 +34,7 @@ const Hero = () => {
               >
                 <h1 className="hero-heading">
                   Welcome to
-                  <span className="highlight-text">CSE Pathshala</span>
+                  <span className="highlight-text"> CSE Pathshala</span>
                 </h1>
                 <p className="hero-subheading">
                   Your journey to mastering Computer Science starts here
