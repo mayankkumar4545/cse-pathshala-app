@@ -1,9 +1,9 @@
 import React from "react";
 import { useInView } from "react-intersection-observer";
 import CountUp from "react-countup";
-import Navbar from "./Navbar";
 import "./Hero.css"; // Using the updated CSS below
 import heroImage from "/assets/hero-banner.jpeg";
+import Navbar from "./Navbar";
 
 const Hero = () => {
   // Observer for the main content (text and image)

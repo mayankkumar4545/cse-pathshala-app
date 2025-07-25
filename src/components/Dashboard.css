@@ -1,0 +1,225 @@
+/* --- Main Dashboard Layout --- */
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  background-color: #fdf3ec;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden; /* Prevent body scroll when sidebar is open */
+}
+
+/* --- Sidebar Styling --- */
+.dashboard-sidebar {
+  width: 260px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  box-shadow: 4px 0px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.sidebar-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #f57c4a;
+}
+
+.sidebar-close-btn {
+  display: none; /* Hidden by default, shown on mobile */
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.dashboard-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  flex-grow: 1;
+}
+
+.dashboard-nav a {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #4a4a4a;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dashboard-nav a:hover {
+  background-color: #fff2e8;
+}
+
+.dashboard-nav a.active {
+  background-color: #f57c4a;
+  color: white;
+}
+
+.dashboard-nav a .bi {
+  margin-right: 1rem;
+  font-size: 1.2rem;
+}
+
+.sidebar-footer {
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.user-info {
+  text-align: center;
+  color: #6c757d;
+  margin-bottom: 1rem;
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 0.7rem;
+  border: none;
+  background-color: #ffeadd;
+  color: #f57c4a;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover {
+  background-color: #fddacc;
+}
+
+/* --- Main Content Styling --- */
+.dashboard-main-content {
+  flex-grow: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  position: relative;
+}
+
+.sidebar-open-btn {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  cursor: pointer;
+}
+
+/* --- CourseViewer & Placeholder Styling --- */
+.dashboard-placeholder {
+  padding: 2rem;
+  text-align: center;
+}
+.video-player-wrapper {
+  position: relative;
+  padding-top: 56.25%;
+  background-color: #000;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.video-player-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.video-details {
+  padding: 1.5rem 0;
+}
+.video-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.course-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #555;
+}
+.playlist-wrapper {
+  margin-top: 2rem;
+}
+.playlist-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #fdeee2;
+  padding-bottom: 0.5rem;
+}
+.playlist {
+  list-style: none;
+  padding: 0;
+}
+.playlist-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.playlist-item:hover {
+  background-color: #f9f9f9;
+}
+.playlist-item.active {
+  background-color: #f57c4a;
+  color: white;
+}
+.playlist-item.active .playlist-video-duration,
+.playlist-item.active .bi {
+  color: white !important;
+}
+.playlist-item .bi {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  color: #f57c4a;
+}
+.playlist-video-title {
+  flex-grow: 1;
+  font-weight: 500;
+}
+.playlist-video-duration {
+  font-weight: 500;
+  color: #6c757d;
+}
+
+/* --- Responsive Adjustments for Dashboard --- */
+@media (max-width: 991.98px) {
+  .dashboard-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    transform: translateX(-100%);
+    z-index: 1000;
+  }
+  .dashboard-sidebar.open {
+    transform: translateX(0);
+  }
+  .sidebar-open-btn,
+  .sidebar-close-btn {
+    display: block;
+  }
+  .dashboard-main-content {
+    padding-top: 5rem; /* Space for the open button */
+  }
+}

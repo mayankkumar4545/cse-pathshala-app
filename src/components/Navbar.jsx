@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Navbar.css"; // Using the updated CSS below
 
 const Navbar = () => {
@@ -10,10 +11,10 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-light bright-nest-navbar sticky-top">
       <div className="container">
         {/* Logo */}
-        <a className="navbar-brand fw-bold" href="#">
+        <Link className="navbar-brand fw-bold" to="/">
           <i className="bi bi-book-half me-2"></i>
           CSE Pathshala
-        </a>
+        </Link>
 
         {/* Responsive Toggler Button */}
         <button
@@ -34,26 +35,26 @@ const Navbar = () => {
           <ul className="navbar-nav mx-auto">
             {navItems.map((item) => (
               <li className="nav-item" key={item}>
-                <a
+                <Link
                   className={`nav-link ${activeLink === item ? "active" : ""}`}
-                  href="#"
+                  to="/navItems"
                   // Set the active link on click
                   onClick={() => setActiveLink(item)}
                 >
                   {item}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
 
           {/* Login/Enroll Buttons */}
           <div className="d-flex align-items-center auth-buttons">
-            <a href="#" className="btn login-btn me-2">
+            <Link to="/login" className="btn login-btn me-2">
               Login
-            </a>
-            <a href="#" className="btn enroll-now-btn">
+            </Link>
+            <Link to="/enroll" className="btn enroll-now-btn">
               Enroll Now
-            </a>
+            </Link>
           </div>
         </div>
       </div>

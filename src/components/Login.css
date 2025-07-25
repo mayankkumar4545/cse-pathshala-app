@@ -1,0 +1,220 @@
+/* --- Login Page Styling --- */
+
+.login-page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #fdf3ec;
+  padding: 2rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.login-box {
+  background-color: #ffffff;
+  padding: 2.5rem 3rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+}
+
+.login-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.login-subtitle {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-bottom: 2rem;
+}
+
+.login-input-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.login-input-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #4a4a4a;
+  margin-bottom: 0.5rem;
+}
+
+.login-input-group input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-input-group input:focus {
+  outline: none;
+  border-color: #f57c4a;
+  box-shadow: 0 0 0 3px rgba(245, 124, 74, 0.2);
+}
+
+.login-submit-button {
+  width: 100%;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #f57c4a;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-submit-button:hover:not(:disabled) {
+  background-color: #e56b3a;
+  transform: translateY(-2px);
+}
+
+.login-submit-button:disabled {
+  background-color: #f8a891;
+  cursor: not-allowed;
+}
+
+/* --- UPDATED FOOTER ACTIONS STYLING --- */
+.login-footer-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between; /* Positions items at opposite ends */
+  align-items: center;
+}
+
+.forgot-password-button {
+  background: none;
+  border: none;
+  color: #f57c4a;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+}
+
+.forgot-password-button:hover:not(:disabled) {
+  text-decoration: underline;
+}
+
+/* --- NEW STYLES FOR HOME BUTTON --- */
+.home-link-button {
+  background: none;
+  border: none;
+  color: #6c757d; /* Subtle grey color */
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.home-link-button:hover {
+  color: #f57c4a;
+}
+
+.home-link-button .bi {
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+/* --- Message Styling --- */
+.login-error-message,
+.login-success-message {
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.login-error-message {
+  color: #d8000c;
+  background-color: #ffbaba;
+}
+
+.login-success-message {
+  color: #270;
+  background-color: #dff2bf;
+}
+
+/* --- Modal Styling --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: linear-gradient(145deg, #fff7f2, #ffece0);
+  padding: 2.5rem;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 420px;
+  position: relative;
+  text-align: center;
+  color: #333;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.modal-subtitle {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}
+
+.modal-error {
+  color: #d8000c;
+  background-color: #ffbaba;
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.modal-success {
+  color: #270;
+  background-color: #dff2bf;
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Responsive modal padding */
+@media (max-width: 576px) {
+  .modal-content {
+    padding: 2rem 1.5rem;
+  }
+}
