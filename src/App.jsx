@@ -7,7 +7,6 @@ import MainLayout from "./MainLayout";
 // Import Page Components
 import HomePage from "./components/HomePage";
 import About from "./components/About";
-import Contact from "./components/Contact";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import AdminDashboard from "./components/AdminDashboard";
@@ -16,6 +15,7 @@ import CourseDetailPage from "./components/CourseDetailPage";
 import CheckoutPage from "./components/CheckoutPage";
 
 import "./App.css";
+import Contact from "./components/Contact";
 
 function App() {
   return (
@@ -28,6 +28,7 @@ function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+
             <Route path="/course/:courseId" element={<CourseDetailPage />} />
             <Route path="checkout/:courseId" element={<CheckoutPage />} />
           </Route>
