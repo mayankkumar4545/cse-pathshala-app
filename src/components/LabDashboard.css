@@ -1,0 +1,203 @@
+/* --- Coding Lab Dashboard Styling --- */
+.lab-dashboard-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+}
+
+/* --- Sidebar Styling --- */
+.lab-sidebar {
+  width: 240px;
+  background-color: #f7ddc7;
+  border-right: 1px solid #fdeee2;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  flex-shrink: 0;
+  transition: transform 0.3s ease-in-out;
+}
+
+.lab-sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.lab-sidebar-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #f57c4a;
+}
+
+.lab-sidebar-close-btn {
+  display: none; /* Hidden by default, shown on mobile */
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  color: #4a4a4a;
+  cursor: pointer;
+}
+
+.lab-home-link-wrapper {
+  margin-bottom: 2rem;
+}
+
+.lab-home-btn {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f57c4a;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.lab-home-btn:hover {
+  opacity: 0.8;
+}
+.lab-home-btn .bi {
+  margin-right: 0.5rem;
+}
+
+.lab-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lab-nav-item {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4a4a4a;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.lab-nav-item:hover {
+  background-color: #fdf3ec;
+}
+
+.lab-nav-item.active {
+  background-color: #f57c4a;
+  color: white;
+  box-shadow: 0 4px 15px rgba(245, 124, 74, 0.3);
+}
+
+.lab-nav-item .bi {
+  margin-right: 0.8rem;
+  font-size: 1.2rem;
+}
+
+/* --- Main Content (Compiler) Styling --- */
+.lab-main-content {
+  background-color: #fdf3ec;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  position: relative;
+}
+
+.lab-sidebar-open-btn {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  cursor: pointer;
+}
+
+.compiler-wrapper {
+  flex-grow: 1;
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background-color: #1e1e1e; /* Dark background to prevent white flash */
+}
+
+/* --- NEW Loading Overlay Styling --- */
+.compiler-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e1e1e; /* Same as dark theme */
+  z-index: 2;
+  color: #ccc;
+}
+
+.compiler-spinner {
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-left-color: #f57c4a;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- NEW Iframe Transition Styling --- */
+.compiler-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.4s ease-in-out; /* Smooth fade-in transition */
+}
+
+.compiler-iframe.loaded {
+  opacity: 1; /* Visible when loaded */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .lab-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    transform: translateX(-100%);
+    z-index: 1000;
+  }
+  .lab-sidebar.open {
+    transform: translateX(0);
+  }
+  .lab-sidebar-open-btn,
+  .lab-sidebar-close-btn {
+    display: block;
+  }
+  .lab-main-content {
+    padding: 1rem;
+    padding-top: 4rem; /* Make space for the open button */
+  }
+}

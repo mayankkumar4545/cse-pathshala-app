@@ -20,7 +20,7 @@ const Hero = () => {
 
   return (
     <>
-      <Navbar />
+      {/*} <Navbar />*/}
       {/* Hero Section */}
       <div className="hero-section">
         <div className="container">

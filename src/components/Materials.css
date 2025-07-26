@@ -1,0 +1,132 @@
+/* --- Materials View Styling for Dashboard --- */
+.materials-dashboard-view {
+  padding: 1rem;
+}
+
+/* --- Header Styling --- */
+.materials-header-container {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  opacity: 0; /* For animation */
+}
+
+.materials-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.materials-subtitle {
+  font-size: 1rem;
+  color: #6c757d;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* --- Materials List Styling --- */
+.materials-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.material-item-wrapper {
+  opacity: 0; /* For animation */
+}
+
+.material-item {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.material-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.material-icon {
+  font-size: 2.5rem;
+  color: #f57c4a;
+  margin-right: 1.5rem;
+}
+
+.material-details {
+  flex-grow: 1;
+}
+
+.material-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.material-description {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0 0 0.5rem 0;
+}
+
+.material-course-tag {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #f57c4a;
+  padding: 0.2rem 0.6rem;
+  border-radius: 5px;
+}
+
+.material-download-btn {
+  background-color: #f57c4a;
+  color: white;
+  text-decoration: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.material-download-btn:hover {
+  background-color: #e56b3a;
+}
+
+/* --- Animation (reusing from other components) --- */
+.animate-slide-up {
+  animation: slideUpAndFade 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 767.98px) {
+  .material-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  .material-icon {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+  .material-download-btn {
+    margin-top: 1rem;
+    width: 100%;
+    justify-content: center;
+  }
+}

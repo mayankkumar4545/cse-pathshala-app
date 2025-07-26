@@ -1,9 +1,14 @@
 const mongoose = require("mongoose");
 
-const videoSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  videoUrl: { type: String, required: true }, // e.g., YouTube embed URL
-  duration: { type: String, required: true },
-});
+const videoSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    thumbnailUrl: { type: String, required: true },
+    videoUrl: { type: String, required: true },
+    duration: { type: String, required: true },
+  },
+  { timestamps: true }
+);
 
 module.exports = mongoose.model("Video", videoSchema);

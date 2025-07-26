@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import Link
+import { NavLink, Routes, Route, useNavigate, Link } from "react-router-dom";
 import "./Dashboard.css";
 import Videos from "./Video";
-import Courses from "./Courses"; // Use the correct Courses component for the dashboard
+import Materials from "./Materials";
 
 const Dashboard = () => {
-  const [activeView, setActiveView] = useState("courses");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const studentId = localStorage.getItem("studentId");
   const navigate = useNavigate();
@@ -15,18 +14,19 @@ const Dashboard = () => {
     navigate("/login");
   };
 
-  const renderContent = () => {
-    switch (activeView) {
-      case "courses":
-        return <Courses />; // Use the dashboard-specific Courses component
-
-      case "videos":
-        return <Videos />;
-
-      default:
-        return <Courses />; // Default to the dashboard courses view
-    }
-  };
+  const navItems = [
+    { name: "Home", icon: "bi bi-house-door-fill", path: "/" },
+    {
+      name: "Videos",
+      icon: "bi bi-camera-video-fill",
+      path: "/dashboard/videos",
+    },
+    {
+      name: "Materials",
+      icon: "bi bi-file-earmark-text-fill",
+      path: "/dashboard/materials",
+    },
+  ];
 
   return (
     <div className="dashboard-container">
@@ -42,32 +42,26 @@ const Dashboard = () => {
           </button>
         </div>
         <nav className="dashboard-nav">
-          {/* --- NEW HOME BUTTON --- */}
-          <Link to="/" className="sidebar-link">
-            <i className="bi bi-house-door-fill"></i> Home
-          </Link>
-
-          <a
-            href="#courses"
-            className={activeView === "courses" ? "active" : "sidebar-link"}
-            onClick={() => {
-              setActiveView("courses");
-              setIsSidebarOpen(false);
-            }}
-          >
-            <i className="bi bi-journal-bookmark-fill"></i> Courses
-          </a>
-          <a
-            href="#videos"
-            className={activeView === "videos" ? "active" : "sidebar-link"}
-            onClick={() => {
-              setActiveView("videos");
-              setIsSidebarOpen(false);
-            }}
-          >
-            <i className="bi bi-camera-video-fill"></i> Videos
-          </a>
+          {navItems.map((item) =>
+            item.path.startsWith("/") ? (
+              <Link to={item.path} key={item.name} className="sidebar-link">
+                <i className={item.icon}></i> {item.name}
+              </Link>
+            ) : (
+              <NavLink
+                to={item.path}
+                key={item.name}
+                className={({ isActive }) =>
+                  isActive ? "sidebar-link active" : "sidebar-link"
+                }
+                onClick={() => setIsSidebarOpen(false)}
+              >
+                <i className={item.icon}></i> {item.name}
+              </NavLink>
+            )
+          )}
         </nav>
+        {/* --- NEW FOOTER SECTION --- */}
         <div className="sidebar-footer">
           <div className="user-info">
             Welcome, <strong>{studentId || "Student"}</strong>
@@ -86,7 +80,11 @@ const Dashboard = () => {
         >
           <i className="bi bi-list"></i>
         </button>
-        {renderContent()}
+        <Routes>
+          <Route index element={<Videos />} />
+          <Route path="videos" element={<Videos />} />
+          <Route path="materials" element={<Materials />} />
+        </Routes>
       </main>
     </div>
   );

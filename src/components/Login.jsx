@@ -1,55 +1,75 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom"; // 1. Import Link
+import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
 
-// The backend server URL
 const API_URL = "http://localhost:5000/api/auth";
 
 const Login = () => {
-  // State for the main login form
-  const [studentId, setStudentId] = useState("");
+  const [userType, setUserType] = useState("student"); // 'student' or 'admin'
+  const [identifier, setIdentifier] = useState(""); // Holds studentId or email
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // --- State for the Forgot Password Modal ---
+  // --- State for Forgot Password Modal ---
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // ... (rest of the modal state remains the same)
   const [modalStep, setModalStep] = useState(1);
   const [modalLoading, setModalLoading] = useState(false);
   const [modalError, setModalError] = useState("");
   const [modalMessage, setModalMessage] = useState("");
-
-  // --- State for the form fields inside the modal ---
   const [resetStudentId, setResetStudentId] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
-  // --- Main Login Handler ---
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
-    setMessage("");
+
     try {
-      const response = await fetch(`${API_URL}/login`, {
+      let endpoint = "";
+      let payload = {};
+
+      if (userType === "student") {
+        endpoint = `${API_URL}/login`;
+        payload = { studentId: identifier, password };
+      } else {
+        endpoint = `${API_URL}/admin/login`;
+        payload = { email: identifier, password };
+      }
+
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ studentId, password }),
+        body: JSON.stringify(payload),
       });
+
       const data = await response.json();
       if (!response.ok) throw new Error(data.message);
 
-      // On success, save user info and redirect
-      localStorage.setItem("studentId", data.studentId);
-      navigate("/dashboard");
+      // Handle successful login
+      if (userType === "student") {
+        localStorage.setItem("studentId", data.studentId);
+        window.open("/dashboard", "_blank"); // Open dashboard in a new tab
+      } else {
+        localStorage.setItem("adminToken", data.token);
+        navigate("/admin/dashboard");
+      }
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleUserTypeChange = (type) => {
+    setUserType(type);
+    setIdentifier("");
+    setPassword("");
+    setError("");
   };
 
   // --- Forgot Password Modal Handlers ---
@@ -73,7 +93,6 @@ const Login = () => {
       setModalLoading(false);
     }
   };
-
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setModalLoading(true);
@@ -94,7 +113,6 @@ const Login = () => {
       setModalLoading(false);
     }
   };
-
   const openModal = () => {
     setIsModalOpen(true);
     setModalStep(1);
@@ -105,29 +123,46 @@ const Login = () => {
     setOtp("");
     setNewPassword("");
   };
-
   const closeModal = () => setIsModalOpen(false);
 
   return (
     <div className="login-page-container">
       <div className="login-box">
-        <h2 className="login-title">Student Login</h2>
-        <p className="login-subtitle">
-          Welcome back! Please enter your credentials.
-        </p>
+        {/* --- NEW USER TYPE TOGGLE --- */}
+        <div className="user-type-toggle">
+          <button
+            className={userType === "student" ? "active" : ""}
+            onClick={() => handleUserTypeChange("student")}
+          >
+            Student
+          </button>
+          <button
+            className={userType === "admin" ? "active" : ""}
+            onClick={() => handleUserTypeChange("admin")}
+          >
+            Admin
+          </button>
+        </div>
+
+        <h2 className="login-title">
+          {userType === "student" ? "Student Login" : "Admin Login"}
+        </h2>
 
         {error && <p className="login-error-message">{error}</p>}
-        {message && <p className="login-success-message">{message}</p>}
 
         <form onSubmit={handleLogin} noValidate>
           <div className="login-input-group">
-            <label htmlFor="studentId">Student ID</label>
+            <label htmlFor="identifier">
+              {userType === "student" ? "Student ID" : "Email"}
+            </label>
             <input
-              type="text"
-              id="studentId"
-              value={studentId}
-              onChange={(e) => setStudentId(e.target.value)}
-              placeholder="e.g., 101"
+              type={userType === "student" ? "text" : "email"}
+              id="identifier"
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
+              placeholder={
+                userType === "student" ? "e.g., 101" : "admin@example.com"
+              }
               required
             />
           </div>
@@ -151,26 +186,23 @@ const Login = () => {
           </button>
         </form>
 
-        {/* 2. ADDED HOME BUTTON AND UPDATED FOOTER LAYOUT */}
         <div className="login-footer-actions">
-          <Link to="/" className="home-link-button">
-            <i className="bi bi-arrow-left"></i> Back to Home
+          <Link to="/" className="home-button">
+            Back to Home
           </Link>
-          <button onClick={openModal} className="forgot-password-button">
-            Forgot Password?
-          </button>
+          {userType === "student" && (
+            <button onClick={openModal} className="forgot-password-button">
+              Forgot Password?
+            </button>
+          )}
         </div>
       </div>
-
-      {/* --- Forgot Password Modal --- */}
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
             <button onClick={closeModal} className="modal-close-button">
               &times;
             </button>
-
-            {/* Step 1: Enter Student ID and Mobile */}
             {modalStep === 1 && (
               <form onSubmit={handleSendOtp}>
                 <h3 className="modal-title">Reset Password</h3>
@@ -207,8 +239,6 @@ const Login = () => {
                 </button>
               </form>
             )}
-
-            {/* Step 2: Enter OTP and New Password */}
             {modalStep === 2 && (
               <form onSubmit={handleResetPassword}>
                 <h3 className="modal-title">Verify OTP</h3>
@@ -245,8 +275,6 @@ const Login = () => {
                 </button>
               </form>
             )}
-
-            {/* Step 3: Success Message */}
             {modalStep === 3 && (
               <div>
                 <h3 className="modal-title">Success!</h3>

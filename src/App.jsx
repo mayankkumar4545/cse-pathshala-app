@@ -1,39 +1,43 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./components/Login"; // The login page
-import "./App.css";
-import MainLayout from "./MainLayout";
-import Footer from "./components/Footer";
-import Dashboard from "./components/Dashboard";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// 2. Create a component to protect the dashboard route
-const ProtectedRoute = ({ children }) => {
-  const studentId = localStorage.getItem("studentId");
-  if (!studentId) {
-    // If no student is logged in, redirect to the login page
-    return <Navigate to="/login" />;
-  }
-  return children;
-};
+// Import Layouts
+import MainLayout from "./MainLayout";
+
+// Import Page Components
+import HomePage from "./components/HomePage";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
+import AdminDashboard from "./components/AdminDashboard";
+import LabDashboard from "./components/LabDashboard";
+import CourseDetailPage from "./components/CourseDetailPage";
+import CheckoutPage from "./components/CheckoutPage";
+
+import "./App.css";
+
 function App() {
   return (
     <BrowserRouter>
       <div className="page-container">
         <Routes>
-          {/* Route for the main landing page */}
-          <Route path="/" element={<MainLayout />} />
-          {/* Route for the login page */}
+          {/* --- Routes WITH Main Navbar & Footer --- */}
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/course/:courseId" element={<CourseDetailPage />} />
+            <Route path="checkout/:courseId" element={<CheckoutPage />} />
+          </Route>
+
+          {/* --- Routes WITHOUT Main Navbar & Footer (Full-screen apps) --- */}
           <Route path="/login" element={<Login />} />
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/dashboard/*" element={<Dashboard />} />
+          <Route path="/admin/*" element={<AdminDashboard />} />
+          <Route path="/lab" element={<LabDashboard />} />
         </Routes>
-        <Footer />
       </div>
     </BrowserRouter>
   );

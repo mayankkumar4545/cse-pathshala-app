@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import { Link } from "react-router-dom"; // Import Link for routing
 import "./Courses.css"; // Using the dedicated dashboard CSS
 
 const API_URL = "http://localhost:5000/api";
@@ -10,6 +11,14 @@ const AnimatedCourseCard = ({ course, index }) => {
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
 
   return (
     <div
@@ -29,15 +38,37 @@ const AnimatedCourseCard = ({ course, index }) => {
             alt={course.title}
             className="course-card-image"
           />
+          <div className="course-card-price">${course.price}</div>
         </div>
         <div className="course-card-body">
           <h5 className="course-card-title">{course.title}</h5>
           <p className="course-card-description">{course.description}</p>
+          {/* --- Display New Data --- */}
           <div className="course-card-stats">
+            <span>
+              <i className="bi bi-clock-history"></i> {course.duration}
+            </span>
+            <span>
+              <i className="bi bi-calendar-check"></i> Enroll by:{" "}
+              {formatDate(course.enrollDate)}
+            </span>
+            <span>
+              <i className="bi bi-calendar-event"></i> Exam:{" "}
+              {formatDate(course.examDate)}
+            </span>
             <span>
               <i className="bi bi-camera-video"></i>{" "}
               {course.videos?.length || 0} Videos
             </span>
+          </div>
+          {/* --- Functional Buttons --- */}
+          <div className="course-card-buttons">
+            <Link to={`/buy/${course._id}`} className="buy-now-btn">
+              Buy Now
+            </Link>
+            <Link to={`/course/${course._id}`} className="explore-btn">
+              Explore Course
+            </Link>
           </div>
         </div>
       </div>

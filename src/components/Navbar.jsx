@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "./Navbar.css"; // Using the updated CSS below
+import React from "react";
+import { NavLink, Link } from "react-router-dom"; // 1. Import NavLink
+import "./Navbar.css";
 
 const Navbar = () => {
-  // State to track the active navigation link
-  const [activeLink, setActiveLink] = useState("Home");
-  const navItems = ["Home", "About", "Services", "Contact", "Blog"];
+  // 2. We can remove useState because NavLink handles the active state for us.
+  const navItems = ["Home", "About", "Services", "Contact", "Blog", "Lab"];
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bright-nest-navbar sticky-top">
@@ -35,25 +34,23 @@ const Navbar = () => {
           <ul className="navbar-nav mx-auto">
             {navItems.map((item) => (
               <li className="nav-item" key={item}>
-                <Link
-                  className={`nav-link ${activeLink === item ? "active" : ""}`}
-                  to="/navItems"
-                  // Set the active link on click
-                  onClick={() => setActiveLink(item)}
+                {/* 3. Use NavLink for automatic active class styling */}
+                <NavLink
+                  className={({ isActive }) =>
+                    `nav-link ${isActive ? "active" : ""}`
+                  }
+                  to={item === "Home" ? "/home" : `/${item.toLowerCase()}`}
                 >
                   {item}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>
 
-          {/* Login/Enroll Buttons */}
+          {/* Login Button */}
           <div className="d-flex align-items-center auth-buttons">
             <Link to="/login" className="btn login-btn me-2">
               Login
-            </Link>
-            <Link to="/enroll" className="btn enroll-now-btn">
-              Enroll Now
             </Link>
           </div>
         </div>

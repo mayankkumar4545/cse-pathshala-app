@@ -2,19 +2,23 @@
 .dashboard-container {
   display: flex;
   height: 100vh;
-  background-color: #fdf3ec;
+  background-color: #fff7f0;
   font-family: "Poppins", sans-serif;
   overflow: hidden; /* Prevent body scroll when sidebar is open */
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
 }
 
 /* --- Sidebar Styling --- */
 .dashboard-sidebar {
   width: 260px;
-  background-color: #ffffff;
+  background-color: #f7ddc7;
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
-  box-shadow: 4px 0px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 4px 0px 20px rgba(16, 15, 15, 0.05);
   transition: transform 0.3s ease-in-out;
 }
 

@@ -1,0 +1,119 @@
+/* --- Shared Styling for Admin Content Pages --- */
+
+.admin-content-container {
+  padding: 1rem;
+}
+
+.admin-content-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.admin-form-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.admin-form-container h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.admin-form-button {
+  background-color: #f57c4a;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.admin-form-button:hover {
+  background-color: #e56b3a;
+}
+
+.admin-list-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.admin-list-container h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.admin-list {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.admin-list-item:last-child {
+  border-bottom: none;
+}
+
+.admin-delete-button {
+  background-color: #ffbaba;
+  color: #d8000c;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-error-message,
+.admin-success-message {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+}
+
+.admin-error-message {
+  color: #d8000c;
+  background-color: #ffbaba;
+}
+
+.admin-success-message {
+  color: #270;
+  background-color: #dff2bf;
+}

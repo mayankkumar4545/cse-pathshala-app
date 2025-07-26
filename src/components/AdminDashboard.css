@@ -1,0 +1,149 @@
+/* --- Admin Dashboard Layout --- */
+.admin-dashboard-container {
+  display: flex;
+  height: 100vh;
+  background-color: #fff7f0;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+}
+
+/* --- Sidebar Styling --- */
+.admin-sidebar {
+  width: 280px;
+  background-color: #f7ddc7;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  box-shadow: 2px 0px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease-in-out;
+  flex-shrink: 0;
+}
+
+.admin-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+
+.admin-sidebar-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.admin-sidebar-close-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2.2rem;
+  cursor: pointer;
+  color: #888;
+}
+
+.admin-dashboard-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
+}
+
+.admin-dashboard-nav a,
+.admin-sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 0.9rem 1.2rem;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.admin-dashboard-nav a:hover,
+.admin-sidebar-link:hover {
+  background-color: #f5f5f5;
+  color: #f57c4a;
+}
+
+.admin-dashboard-nav a.active {
+  background-color: #f57c4a;
+  color: white;
+  box-shadow: 0 4px 10px rgba(245, 124, 74, 0.3);
+}
+
+.admin-dashboard-nav a .bi,
+.admin-sidebar-link .bi {
+  margin-right: 1rem;
+  font-size: 1.3rem;
+  width: 24px; /* Ensure alignment */
+  text-align: center;
+}
+
+.admin-sidebar-footer {
+  padding-top: 1.5rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.admin-logout-btn {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #fddacc;
+  background-color: transparent;
+  color: #f57c4a;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.admin-logout-btn:hover {
+  background-color: #f57c4a;
+  color: white;
+}
+
+/* --- Main Content --- */
+.admin-dashboard-main {
+  flex-grow: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  position: relative;
+}
+
+.admin-sidebar-open-btn {
+  display: none; /* Hidden on desktop */
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  cursor: pointer;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+  .admin-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    transform: translateX(-100%);
+    z-index: 1000;
+  }
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+  .admin-sidebar-open-btn,
+  .admin-sidebar-close-btn {
+    display: block;
+  }
+  .admin-dashboard-main {
+    padding-top: 5rem; /* Space for the open button */
+  }
+}

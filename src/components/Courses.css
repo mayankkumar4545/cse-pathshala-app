@@ -1,55 +1,49 @@
-/* --- Dashboard "Courses" View Styling --- */
-
+/* --- Styling for the Courses view inside the Dashboard --- */
 .courses-dashboard-view {
   padding: 1rem;
 }
 
-/* --- Scoped Class Names for Dashboard --- */
-.courses-header-container,
-.course-card-wrapper {
-  opacity: 0; /* Hidden for animation */
-}
-
 .courses-header-container {
-  text-align: left;
+  text-align: center;
   margin-bottom: 2.5rem;
+  opacity: 0; /* For animation */
 }
 
 .courses-title {
   font-size: 2rem;
   font-weight: 700;
-  color: #2f2f2f;
-  margin-bottom: 0.5rem;
+  color: #333;
 }
 
 .courses-subtitle {
   font-size: 1rem;
   color: #6c757d;
-  margin: 0;
+  margin-top: 0.5rem;
 }
 
-/* --- Card Styling for Dashboard --- */
+.course-card-wrapper {
+  opacity: 0; /* For animation */
+}
+
 .course-card {
   background-color: #ffffff;
   border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: 100%;
-  border: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
 }
 
 .course-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
 }
 
 .course-card-image-container {
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio */
   position: relative;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  overflow: hidden;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
 }
 
 .course-card-image {
@@ -59,14 +53,31 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.course-card-price {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: rgba(245, 124, 74, 0.9);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 .course-card-body {
   padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .course-card-title {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: #333;
   margin-bottom: 0.5rem;
@@ -77,26 +88,69 @@
   color: #6c757d;
   line-height: 1.6;
   margin-bottom: 1rem;
-  height: 65px; /* Fixed height for description */
-  overflow: hidden;
+  flex-grow: 1;
 }
 
 .course-card-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   font-size: 0.85rem;
-  color: #f57c4a;
-  font-weight: 500;
+  color: #555;
+  margin-bottom: 1.5rem;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 1rem;
+}
+
+.course-card-stats span {
+  display: flex;
+  align-items: center;
 }
 
 .course-card-stats .bi {
-  margin-right: 6px;
+  margin-right: 8px;
+  color: #f57c4a;
 }
 
-/* --- Animation --- */
+.course-card-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto; /* Pushes buttons to the bottom */
+}
+
+.buy-now-btn,
+.explore-btn {
+  flex: 1;
+  padding: 0.6rem;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.buy-now-btn {
+  background-color: #f57c4a;
+  color: white;
+}
+.buy-now-btn:hover {
+  background-color: #e56b3a;
+}
+
+.explore-btn {
+  background-color: #fff2e8;
+  color: #f57c4a;
+}
+.explore-btn:hover {
+  background-color: #fdeee2;
+}
+
+/* Animation class */
 .animate-slide-up {
-  animation: slideUpDashboard 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: slideUpAndFade 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-@keyframes slideUpDashboard {
+@keyframes slideUpAndFade {
   from {
     opacity: 0;
     transform: translateY(40px);
