@@ -3,9 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import "./AdminDashboard.css";
 import ManageVideos from "./ManageVideos";
 import ManageMaterials from "./ManageMaterials";
+import ManageQuizzes from "./ManageQuizzes";
+import ManageResults from "./ManageResults"; // 1. Import the new component
 
 const AdminDashboard = () => {
-  const [activeView, setActiveView] = useState("courses"); // Default view
+  const [activeView, setActiveView] = useState("videos");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -14,17 +16,23 @@ const AdminDashboard = () => {
     navigate("/login");
   };
 
+  // 2. Add the new component to the render logic
   const renderContent = () => {
     switch (activeView) {
       case "videos":
         return <ManageVideos />;
       case "materials":
         return <ManageMaterials />;
+      case "quizzes":
+        return <ManageQuizzes />;
+      case "results":
+        return <ManageResults />; // Add the new case
       default:
         return <ManageVideos />;
     }
   };
 
+  // 3. Add the new navigation item
   const navItems = [
     {
       id: "home",
@@ -39,11 +47,20 @@ const AdminDashboard = () => {
       icon: "bi-file-earmark-text-fill",
       label: "Manage Materials",
     },
+    {
+      id: "quizzes",
+      icon: "bi-patch-question-fill",
+      label: "Manage Quizzes",
+    },
+    {
+      id: "results",
+      icon: "bi-bar-chart-line-fill",
+      label: "Manage Results",
+    },
   ];
 
   return (
     <div className="admin-dashboard-container">
-      {/* Sidebar Navigation */}
       <aside className={`admin-sidebar ${isSidebarOpen ? "open" : ""}`}>
         <div className="admin-sidebar-header">
           <h1 className="admin-sidebar-title">Admin Panel</h1>
@@ -83,7 +100,6 @@ const AdminDashboard = () => {
         </div>
       </aside>
 
-      {/* Main Content */}
       <main className="admin-dashboard-main">
         <button
           className="admin-sidebar-open-btn"

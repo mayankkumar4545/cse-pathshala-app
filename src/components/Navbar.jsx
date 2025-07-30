@@ -4,7 +4,7 @@ import "./Navbar.css";
 
 const Navbar = () => {
   // 2. We can remove useState because NavLink handles the active state for us.
-  const navItems = ["Home", "About", "Services", "Contact", "Blog", "Lab"];
+  const navItems = ["Home", "About", "Services", "Contact", "Quiz", "Lab"];
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bright-nest-navbar sticky-top">

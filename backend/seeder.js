@@ -6,17 +6,17 @@ const Student = require("./models/Student");
 dotenv.config();
 
 const studentsToCreate = [
-  { studentId: "12004657", password: "Cse@45", mobileNumber: "7349737968" },
-  { studentId: "12005747", password: "Cse@38", mobileNumber: "9876543211" },
-  { studentId: "103", password: "Cs@103", mobileNumber: "9876543212" },
-  { studentId: "104", password: "Cs@104", mobileNumber: "9876543213" },
-  { studentId: "105", password: "Cs@105", mobileNumber: "9876543214" },
-  { studentId: "106", password: "Cs@106", mobileNumber: "9876543215" },
-  { studentId: "107", password: "Cs@107", mobileNumber: "9876543216" },
-  { studentId: "108", password: "Cs@108", mobileNumber: "9876543217" },
-  { studentId: "109", password: "Cs@109", mobileNumber: "9876543218" },
-  { studentId: "110", password: "Cs@110", mobileNumber: "9876543219" },
-  { studentId: "111", password: "Cs@111", mobileNumber: "9876543220" },
+  { studentId: "101", password: "123456", mobileNumber: "1234567890" },
+  { studentId: "102", password: "123456", mobileNumber: "9876543211" },
+  { studentId: "103", password: "123456", mobileNumber: "9876543212" },
+  { studentId: "104", password: "123456", mobileNumber: "9876543213" },
+  { studentId: "105", password: "123456", mobileNumber: "9876543214" },
+  { studentId: "106", password: "123456", mobileNumber: "9876543215" },
+  { studentId: "107", password: "123456", mobileNumber: "9876543216" },
+  { studentId: "108", password: "123456", mobileNumber: "9876543217" },
+  { studentId: "109", password: "123456", mobileNumber: "9876543218" },
+  { studentId: "110", password: "123456", mobileNumber: "9876543219" },
+  { studentId: "111", password: "123456", mobileNumber: "9876543220" },
 ];
 
 const connectDB = async () => {

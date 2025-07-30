@@ -1,0 +1,56 @@
+/* --- Dedicated Styling for Manage Videos Page --- */
+@import url("./AdminContent.css"); /* Inherit base styles */
+
+/* Form-specific layout */
+.admin-form .form-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.admin-form .form-row .form-group {
+  flex: 1; /* Each group takes equal space */
+}
+
+/* --- Toggle Switch Styling --- */
+.toggle-switch {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.toggle-switch button {
+  flex: 1;
+  padding: 0.8rem;
+  border: none;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  font-weight: 500;
+  color: #555;
+  transition: background-color 0.2s ease;
+}
+
+.toggle-switch button:first-child {
+  border-right: 1px solid #ddd;
+}
+
+.toggle-switch button.active {
+  background-color: #f57c4a;
+  color: white;
+}
+
+/* --- Disabled State Styling --- */
+input:disabled,
+textarea:disabled {
+  background-color: #f0f0f0 !important;
+  cursor: not-allowed !important;
+  opacity: 0.6 !important;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 767.98px) {
+  .admin-form .form-row {
+    flex-direction: column; /* Stack fields on mobile */
+    gap: 1.25rem;
+  }
+}

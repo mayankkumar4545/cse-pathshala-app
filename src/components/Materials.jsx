@@ -1,39 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import "./Materials.css"; // We will create this CSS file next
+import "./Materials.css"; // Using the new CSS file
 
 const API_URL = "http://localhost:5000/api";
 
-// Reusable component for each animated material item
+// Reusable animated item component with a bug fix
 const AnimatedMaterialItem = ({ material, index }) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
+  // --- THIS IS THE FIX ---
+  // If the material data hasn't loaded yet, don't render anything.
+  if (!material) {
+    return null;
+  }
+
   return (
     <div
       ref={ref}
-      className={`material-item-wrapper ${inView ? "animate-slide-up" : ""}`}
+      className={`col-lg-4 col-md-6 mb-4 material-card-wrapper ${
+        inView ? "animate-slide-up" : ""
+      }`}
       style={{ animationDelay: `${index * 0.1}s` }}
     >
-      <div className="material-item">
+      <div className="material-card">
         <div className="material-icon">
-          <i className="bi bi-file-earmark-arrow-down-fill"></i>
+          <i className="bi bi-file-earmark-text-fill"></i>
         </div>
-        <div className="material-details">
-          <h4 className="material-title">{material.title}</h4>
-          <p className="material-description">{material.description}</p>
-          <span className="material-course-tag">
-            Course: {material.course.title}
-          </span>
+        <div className="material-card-body">
+          <h5 className="material-item-title">{material.title}</h5>
+          <p className="material-item-filename">{material.fileName}</p>
         </div>
         <a
-          href={material.fileUrl}
+          href={`${API_URL}/materials/download/${material._id}`}
+          className="material-download-btn"
           target="_blank"
           rel="noopener noreferrer"
-          className="material-download-btn"
-          download
         >
           <i className="bi bi-download"></i> Download
         </a>
@@ -42,8 +46,10 @@ const AnimatedMaterialItem = ({ material, index }) => {
   );
 };
 
+// Main Materials component for the dashboard
 const Materials = () => {
   const [materials, setMaterials] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { ref: headerRef, inView: headerInView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
@@ -53,11 +59,15 @@ const Materials = () => {
     const fetchMaterials = async () => {
       try {
         const response = await fetch(`${API_URL}/materials`);
-        if (!response.ok) throw new Error("Network response was not ok");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
         const data = await response.json();
         setMaterials(data);
       } catch (error) {
         console.error("Failed to fetch materials:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchMaterials();
@@ -78,13 +88,15 @@ const Materials = () => {
         </p>
       </div>
 
-      {/* Materials List */}
-      <div className="materials-list">
-        {materials.length > 0 ? (
-          materials.map((material, index) => (
+      {/* Materials Grid */}
+      <div className="row">
+        {loading ? (
+          <p>Loading materials...</p>
+        ) : materials.length > 0 ? (
+          materials.map((item, index) => (
             <AnimatedMaterialItem
-              key={material._id}
-              material={material}
+              key={item._id}
+              material={item}
               index={index}
             />
           ))

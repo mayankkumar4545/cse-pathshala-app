@@ -1,7 +1,6 @@
 /* --- Shared Styling for Admin Content Pages --- */
-
 .admin-content-container {
-  padding: 1rem;
+  padding: 1rem 2rem;
 }
 
 .admin-content-title {
@@ -11,22 +10,26 @@
   color: #333;
 }
 
-.admin-form-container {
+.admin-form-container,
+.admin-list-container {
   background-color: white;
-  padding: 2rem;
+  padding: 2.5rem;
   border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
   margin-bottom: 2rem;
 }
 
-.admin-form-container h3 {
-  font-size: 1.4rem;
+.admin-form-container h3,
+.admin-list-container h3 {
+  font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
 }
 
 .form-group {
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-group label {
@@ -44,6 +47,16 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #f57c4a;
+  box-shadow: 0 0 0 3px rgba(245, 124, 74, 0.15);
 }
 
 .admin-form-button {
@@ -61,19 +74,43 @@
   background-color: #e56b3a;
 }
 
-.admin-list-container {
-  background-color: white;
+/* --- Drag-and-Drop File Input --- */
+.file-drop-zone {
+  border: 2px dashed #ddd;
+  border-radius: 10px;
   padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  position: relative;
 }
 
-.admin-list-container h3 {
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
+.file-drop-zone.drag-over {
+  border-color: #f57c4a;
+  background-color: #fff7f0;
 }
 
+.file-input-native {
+  display: none;
+}
+
+.file-drop-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  color: #6c757d;
+  cursor: pointer;
+}
+
+.file-drop-label .bi {
+  font-size: 3rem;
+  color: #f57c4a;
+  margin-bottom: 0.5rem;
+}
+
+/* --- List Styling --- */
 .admin-list {
   list-style: none;
   padding: 0;
@@ -81,39 +118,80 @@
 
 .admin-list-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 1rem;
   border-bottom: 1px solid #f0f0f0;
 }
 
-.admin-list-item:last-child {
-  border-bottom: none;
+.list-item-icon {
+  font-size: 1.5rem;
+  color: #f57c4a;
+  margin-right: 1.5rem;
 }
 
-.admin-delete-button {
-  background-color: #ffbaba;
-  color: #d8000c;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
+.item-details {
+  flex-grow: 1;
+}
+.item-title {
   font-weight: 600;
-  cursor: pointer;
+  color: #333;
+}
+.item-subtitle {
+  font-size: 0.8rem;
+  color: #999;
 }
 
+.item-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+}
+
+.view-btn {
+  background-color: #e7f3ff;
+  color: #3c91e6;
+}
+.delete-btn {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+/* --- Message Styling --- */
 .admin-error-message,
 .admin-success-message {
-  margin-top: 1rem;
+  margin-bottom: 1.5rem;
   padding: 0.8rem;
   border-radius: 8px;
 }
-
 .admin-error-message {
   color: #d8000c;
   background-color: #ffbaba;
 }
-
 .admin-success-message {
   color: #270;
   background-color: #dff2bf;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+  .admin-list-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+  .item-actions {
+    width: 100%;
+  }
+  .action-btn {
+    flex: 1;
+  }
 }

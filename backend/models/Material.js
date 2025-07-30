@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 
 const materialSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true },
-    description: { type: String, required: true },
-    fileUrl: { type: String, required: true },
-    fileType: {
+    title: {
       type: String,
       required: true,
-      enum: ["PDF", "ZIP", "DOC", "IMAGE"],
-    }, // Example types
+    },
+    fileUrl: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

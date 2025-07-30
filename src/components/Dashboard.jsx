@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, Routes, Route, useNavigate, Link } from "react-router-dom";
+import { NavLink, Routes, Route, useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 import Videos from "./Video";
 import Materials from "./Materials";
@@ -41,27 +41,26 @@ const Dashboard = () => {
             &times;
           </button>
         </div>
+
+        {/* --- CORRECTED NAVIGATION SECTION --- */}
         <nav className="dashboard-nav">
-          {navItems.map((item) =>
-            item.path.startsWith("/") ? (
-              <Link to={item.path} key={item.name} className="sidebar-link">
-                <i className={item.icon}></i> {item.name}
-              </Link>
-            ) : (
-              <NavLink
-                to={item.path}
-                key={item.name}
-                className={({ isActive }) =>
-                  isActive ? "sidebar-link active" : "sidebar-link"
-                }
-                onClick={() => setIsSidebarOpen(false)}
-              >
-                <i className={item.icon}></i> {item.name}
-              </NavLink>
-            )
-          )}
+          {navItems.map((item) => (
+            <NavLink
+              to={item.path}
+              key={item.name}
+              // Add the end prop for the root path to ensure exact matching
+              end={item.path === "/"}
+              className={({ isActive }) =>
+                isActive ? "sidebar-link active" : "sidebar-link"
+              }
+              onClick={() => setIsSidebarOpen(false)}
+            >
+              <i className={item.icon}></i> {item.name}
+            </NavLink>
+          ))}
         </nav>
-        {/* --- NEW FOOTER SECTION --- */}
+
+        {/* --- Sidebar Footer --- */}
         <div className="sidebar-footer">
           <div className="user-info">
             Welcome, <strong>{studentId || "Student"}</strong>
@@ -81,6 +80,7 @@ const Dashboard = () => {
           <i className="bi bi-list"></i>
         </button>
         <Routes>
+          {/* Note: It's good practice to have a default/index route for the dashboard base path */}
           <Route index element={<Videos />} />
           <Route path="videos" element={<Videos />} />
           <Route path="materials" element={<Materials />} />

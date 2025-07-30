@@ -1,0 +1,84 @@
+.manage-results-container {
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.manage-results-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.manage-results-header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.manage-results-header p {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.results-table-wrapper {
+  overflow-x: auto; /* Allows table to be scrolled horizontally on small screens */
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px; /* Ensures table content doesn't wrap too aggressively */
+}
+
+.results-table th,
+.results-table td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.results-table thead {
+  background-color: #fafafa;
+}
+
+.results-table th {
+  font-weight: 600;
+  color: #555;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.results-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.results-table tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+.results-table td {
+  color: #444;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.delete-result-btn {
+  background-color: #fce8e6;
+  color: #d93025;
+  border: 1px solid #f9d5d2;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.delete-result-btn:hover {
+  background-color: #f9d5d2;
+  border-color: #f6b6b1;
+}

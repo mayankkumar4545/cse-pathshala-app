@@ -1,0 +1,159 @@
+.my-results-container {
+  padding: 2rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.my-results-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.my-results-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.my-results-header p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.search-form {
+  max-width: 600px;
+  margin: 0 auto 2.5rem auto;
+  display: flex;
+  gap: 1rem;
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex-grow: 1;
+}
+
+.search-input-wrapper .bi {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 1.2rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem; /* Add padding for the icon */
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #f57c4a;
+  box-shadow: 0 0 0 3px rgba(245, 124, 74, 0.2);
+}
+
+.search-btn {
+  padding: 1rem 1.5rem;
+  border: none;
+  background-color: #f57c4a;
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-btn:hover:not(:disabled) {
+  background-color: #e56b3a;
+}
+.search-btn:disabled {
+  background-color: #f8a891;
+  cursor: not-allowed;
+}
+
+.results-error {
+  text-align: center;
+  color: #d93025;
+  background-color: #fce8e6;
+  padding: 1rem;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+}
+
+.no-results-msg {
+  text-align: center;
+  padding: 3rem;
+  color: #777;
+}
+.no-results-msg .bi {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.results-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.result-item-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+  overflow: hidden;
+}
+
+.result-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #fafafa;
+  border-bottom: 1px solid #eee;
+}
+
+.result-card-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.score-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-weight: 700;
+  color: white;
+  font-size: 0.9rem;
+}
+.score-badge.pass {
+  background-color: #28a745;
+}
+.score-badge.fail {
+  background-color: #d93025;
+}
+
+.result-card-body {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  color: #555;
+}
+
+@media (max-width: 600px) {
+  .search-form {
+    flex-direction: column;
+  }
+  .result-card-body {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
