@@ -7,7 +7,8 @@ const {
   getAllQuizzes,
   getQuizById,
   submitQuiz,
-  deleteQuiz, // 1. Import the new deleteQuiz function from the controller.
+  deleteQuiz,
+  updateQuiz, // 1. Import the new updateQuiz function.
 } = require("../controllers/quizController");
 
 // Import the middleware to protect admin-only routes.
@@ -16,17 +17,16 @@ const { protect } = require("../middleware/authMiddleware");
 // --- Route Definitions ---
 
 // This route handles GETTING all quizzes and CREATING a new quiz.
-// GET /api/quizzes -> getAllQuizzes()
-// POST /api/quizzes -> protect() -> createQuiz()
 router.route("/").get(getAllQuizzes).post(protect, createQuiz);
 
-// This route now handles GETTING a single quiz and DELETING a single quiz.
-// GET /api/quizzes/:id -> getQuizById()
-// DELETE /api/quizzes/:id -> protect() -> deleteQuiz()
-router.route("/:id").get(getQuizById).delete(protect, deleteQuiz); // 2. Add the .delete() method here.
+// This route now handles GETTING, DELETING, and UPDATING a single quiz.
+router
+  .route("/:id")
+  .get(getQuizById)
+  .delete(protect, deleteQuiz)
+  .put(protect, updateQuiz); // 2. Add the .put() method for updates.
 
 // This route handles a student submitting their answers for a specific quiz.
-// POST /api/quizzes/:id/submit -> submitQuiz()
 router.route("/:id/submit").post(submitQuiz);
 
 module.exports = router;

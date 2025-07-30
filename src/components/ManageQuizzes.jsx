@@ -5,15 +5,11 @@ const API_URL = "http://localhost:5000/api/quizzes";
 
 const ManageQuizzes = () => {
   const [quizzes, setQuizzes] = useState([]);
-  const [view, setView] = useState("list"); // 'list' or 'create'
+  const [view, setView] = useState("list");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
-  // --- State for the View Quiz Modal ---
-  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
-  const [selectedQuiz, setSelectedQuiz] = useState(null);
-
-  // Form state for creating a new quiz
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editableQuizId, setEditableQuizId] = useState(null);
   const [quizTitle, setQuizTitle] = useState("");
   const [questions, setQuestions] = useState([
     {
@@ -23,19 +19,17 @@ const ManageQuizzes = () => {
       timer: 30,
     },
   ]);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+  const [selectedQuiz, setSelectedQuiz] = useState(null);
 
   const fetchQuizzes = async () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("adminToken");
       const response = await fetch(API_URL, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
-      if (!response.ok) {
-        throw new Error("Failed to fetch quizzes.");
-      }
+      if (!response.ok) throw new Error("Failed to fetch quizzes.");
       const data = await response.json();
       setQuizzes(data);
     } catch (err) {
@@ -45,12 +39,12 @@ const ManageQuizzes = () => {
     }
   };
 
-  // Fetch all quizzes when the component mounts
   useEffect(() => {
-    fetchQuizzes();
-  }, []);
+    if (view === "list") {
+      fetchQuizzes();
+    }
+  }, [view]);
 
-  // --- Handlers for View and Delete ---
   const openViewModal = (quiz) => {
     setSelectedQuiz(quiz);
     setIsViewModalOpen(true);
@@ -61,40 +55,79 @@ const ManageQuizzes = () => {
     setSelectedQuiz(null);
   };
 
+  const handleEditClick = (quiz) => {
+    setIsEditMode(true);
+    setEditableQuizId(quiz._id);
+    setQuizTitle(quiz.title);
+    const formattedQuestions = quiz.questions.map((q) => ({
+      ...q,
+      options: [...q.options, ...Array(4 - q.options.length).fill("")].slice(
+        0,
+        4
+      ),
+    }));
+    setQuestions(formattedQuestions);
+    setView("form");
+  };
+
   const handleDeleteQuiz = async (quizId) => {
     if (
       !window.confirm("Are you sure you want to permanently delete this quiz?")
-    ) {
+    )
       return;
-    }
     try {
       const token = localStorage.getItem("adminToken");
       const response = await fetch(`${API_URL}/${quizId}`, {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
-      if (!response.ok) {
-        throw new Error("Failed to delete quiz.");
-      }
-      // Refresh the quiz list from the server
+      if (!response.ok) throw new Error("Failed to delete quiz.");
       fetchQuizzes();
     } catch (err) {
       setError(err.message);
     }
   };
 
-  // --- Handlers for the Quiz Creation Form ---
-  const handleQuestionChange = (index, event) => {
-    const newQuestions = [...questions];
-    newQuestions[index][event.target.name] = event.target.value;
-    setQuestions(newQuestions);
+  const resetForm = () => {
+    setIsEditMode(false);
+    setEditableQuizId(null);
+    setQuizTitle("");
+    setQuestions([
+      {
+        questionText: "",
+        options: ["", "", "", ""],
+        correctAnswer: "",
+        timer: 30,
+      },
+    ]);
   };
 
-  const handleOptionChange = (qIndex, oIndex, event) => {
-    const newQuestions = [...questions];
-    newQuestions[qIndex].options[oIndex] = event.target.value;
+  // --- REWRITTEN STATE UPDATE HANDLER (THE FIX) ---
+  const handleQuestionDataChange = (qIndex, event) => {
+    const { name, value } = event.target;
+
+    // Create a deep clone of the questions array to ensure no direct mutation.
+    const newQuestions = JSON.parse(JSON.stringify(questions));
+    const questionToUpdate = newQuestions[qIndex];
+
+    if (name.startsWith("option-")) {
+      const optionIndex = parseInt(name.split("-")[1], 10);
+      questionToUpdate.options[optionIndex] = value;
+    } else {
+      questionToUpdate[name] = value;
+    }
+
+    // After every change, re-validate the correct answer.
+    const validOptions = questionToUpdate.options.filter(
+      (opt) => opt && opt.trim() !== ""
+    );
+    if (
+      questionToUpdate.correctAnswer &&
+      !validOptions.includes(questionToUpdate.correctAnswer)
+    ) {
+      questionToUpdate.correctAnswer = ""; // Reset if the answer is no longer a valid option
+    }
+
     setQuestions(newQuestions);
   };
 
@@ -115,37 +148,69 @@ const ManageQuizzes = () => {
     setQuestions(newQuestions);
   };
 
-  const handleCreateQuiz = async (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
+
+    if (!quizTitle.trim()) {
+      setError("Quiz title is required.");
+      return;
+    }
+
+    const processedQuestions = questions.map((q) => ({
+      ...q,
+      options: q.options.filter((opt) => opt && opt.trim() !== ""),
+    }));
+
+    for (const q of processedQuestions) {
+      if (!q.questionText.trim()) {
+        setError("Every question must have text.");
+        return;
+      }
+      if (q.options.length < 2) {
+        setError(`A question must have at least two non-empty options.`);
+        return;
+      }
+      if (!q.correctAnswer) {
+        setError(
+          `A correct answer must be selected for the question: "${q.questionText}".`
+        );
+        return;
+      }
+    }
+
+    setLoading(true);
+    const token = localStorage.getItem("adminToken");
+    if (!token) {
+      setError("Admin token not found.");
+      setLoading(false);
+      return;
+    }
+
+    const url = isEditMode ? `${API_URL}/${editableQuizId}` : API_URL;
+    const method = isEditMode ? "PUT" : "POST";
+
     try {
-      const token = localStorage.getItem("adminToken");
-      if (!token) throw new Error("Admin token not found.");
-      const payload = { title: quizTitle, questions };
-      const response = await fetch(API_URL, {
-        method: "POST",
+      const response = await fetch(url, {
+        method: method,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          title: quizTitle,
+          questions: processedQuestions,
+        }),
       });
       if (!response.ok) {
         const errData = await response.json();
-        throw new Error(errData.message || "Failed to create quiz.");
+        throw new Error(
+          errData.message ||
+            `Failed to ${isEditMode ? "update" : "create"} quiz.`
+        );
       }
       setView("list");
-      fetchQuizzes(); // Refetch quizzes to show the new one
-      setQuizTitle("");
-      setQuestions([
-        {
-          questionText: "",
-          options: ["", "", "", ""],
-          correctAnswer: "",
-          timer: 30,
-        },
-      ]);
+      resetForm();
     } catch (err) {
       setError(err.message);
     } finally {
@@ -153,16 +218,21 @@ const ManageQuizzes = () => {
     }
   };
 
-  // --- Render Logic ---
-  const renderCreateForm = () => (
+  const renderForm = () => (
     <div className="quiz-form-container">
       <div className="quiz-form-header">
-        <h2>Create a New Quiz</h2>
-        <button onClick={() => setView("list")} className="quiz-form-back-btn">
+        <h2>{isEditMode ? "Edit Quiz" : "Create a New Quiz"}</h2>
+        <button
+          onClick={() => {
+            setView("list");
+            resetForm();
+          }}
+          className="quiz-form-back-btn"
+        >
           <i className="bi bi-x-lg"></i> Cancel
         </button>
       </div>
-      <form onSubmit={handleCreateQuiz}>
+      <form onSubmit={handleFormSubmit}>
         <div className="quiz-form-group">
           <label htmlFor="quizTitle">Quiz Title</label>
           <input
@@ -178,13 +248,15 @@ const ManageQuizzes = () => {
           <div key={qIndex} className="question-card">
             <div className="question-header">
               <h4>Question {qIndex + 1}</h4>
-              <button
-                type="button"
-                onClick={() => removeQuestion(qIndex)}
-                className="remove-question-btn"
-              >
-                <i className="bi bi-trash3-fill"></i>
-              </button>
+              {questions.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => removeQuestion(qIndex)}
+                  className="remove-question-btn"
+                >
+                  <i className="bi bi-trash3-fill"></i>
+                </button>
+              )}
             </div>
             <div className="quiz-form-group">
               <label>Question Text</label>
@@ -192,7 +264,7 @@ const ManageQuizzes = () => {
                 type="text"
                 name="questionText"
                 value={q.questionText}
-                onChange={(e) => handleQuestionChange(qIndex, e)}
+                onChange={(e) => handleQuestionDataChange(qIndex, e)}
                 placeholder="e.g., What is a variable?"
                 required
               />
@@ -203,8 +275,9 @@ const ManageQuizzes = () => {
                   <label>Option {oIndex + 1}</label>
                   <input
                     type="text"
+                    name={`option-${oIndex}`}
                     value={opt}
-                    onChange={(e) => handleOptionChange(qIndex, oIndex, e)}
+                    onChange={(e) => handleQuestionDataChange(qIndex, e)}
                     placeholder={`Option ${oIndex + 1}`}
                   />
                 </div>
@@ -216,14 +289,14 @@ const ManageQuizzes = () => {
                 <select
                   name="correctAnswer"
                   value={q.correctAnswer}
-                  onChange={(e) => handleQuestionChange(qIndex, e)}
+                  onChange={(e) => handleQuestionDataChange(qIndex, e)}
                   required
                 >
                   <option value="" disabled>
-                    Select the correct answer
+                    Select a valid answer
                   </option>
                   {q.options
-                    .filter((opt) => opt.trim() !== "")
+                    .filter((opt) => opt && opt.trim() !== "")
                     .map((opt, oIndex) => (
                       <option key={oIndex} value={opt}>
                         {opt}
@@ -237,7 +310,7 @@ const ManageQuizzes = () => {
                   type="number"
                   name="timer"
                   value={q.timer}
-                  onChange={(e) => handleQuestionChange(qIndex, e)}
+                  onChange={(e) => handleQuestionDataChange(qIndex, e)}
                   min="5"
                   required
                 />
@@ -254,7 +327,7 @@ const ManageQuizzes = () => {
         </button>
         {error && <p className="quiz-error-message">{error}</p>}
         <button type="submit" className="quiz-submit-btn" disabled={loading}>
-          {loading ? "Creating..." : "Create Quiz"}
+          {loading ? "Saving..." : isEditMode ? "Update Quiz" : "Create Quiz"}
         </button>
       </form>
     </div>
@@ -265,7 +338,10 @@ const ManageQuizzes = () => {
       <div className="quiz-list-header">
         <h2>Available Quizzes</h2>
         <button
-          onClick={() => setView("create")}
+          onClick={() => {
+            setView("form");
+            resetForm();
+          }}
           className="create-new-quiz-btn"
         >
           <i className="bi bi-plus-lg"></i> Create New Quiz
@@ -285,6 +361,12 @@ const ManageQuizzes = () => {
                     onClick={() => openViewModal(quiz)}
                   >
                     <i className="bi bi-eye-fill"></i> View
+                  </button>
+                  <button
+                    className="quiz-action-btn edit-btn"
+                    onClick={() => handleEditClick(quiz)}
+                  >
+                    <i className="bi bi-pencil-fill"></i> Edit
                   </button>
                   <button
                     className="quiz-action-btn delete-btn"
@@ -340,7 +422,7 @@ const ManageQuizzes = () => {
 
   return (
     <section className="manage-quizzes-section">
-      {view === "list" ? renderQuizList() : renderCreateForm()}
+      {view === "list" ? renderQuizList() : renderForm()}
       {isViewModalOpen && renderViewModal()}
     </section>
   );

@@ -4,7 +4,6 @@ const Quiz = require("../models/Quiz");
  * @desc    Create a new quiz
  * @route   POST /api/quizzes
  * @access  Private/Admin
- * @body    { title: String, questions: [{ questionText: String, options: [String], correctAnswer: String, timer: Number }] }
  */
 exports.createQuiz = async (req, res) => {
   try {
@@ -102,7 +101,6 @@ exports.getQuizById = async (req, res) => {
  * @desc    Submit a quiz and calculate the score
  * @route   POST /api/quizzes/:id/submit
  * @access  Public (for students)
- * @body    { answers: [String] }
  */
 exports.submitQuiz = async (req, res) => {
   try {
@@ -150,7 +148,6 @@ exports.submitQuiz = async (req, res) => {
       results,
     });
   } catch (error) {
-    // The underscore has been removed here.
     console.error("Error submitting quiz:", error);
     res
       .status(500)
@@ -173,12 +170,6 @@ exports.deleteQuiz = async (req, res) => {
       return res.status(404).json({ message: "Quiz not found" });
     }
 
-    // Optional: You could add a check here to ensure only the admin who created it can delete it.
-    // This adds an extra layer of security.
-    // if (quiz.createdBy.toString() !== req.admin.id) {
-    //   return res.status(401).json({ message: 'User not authorized to delete this quiz' });
-    // }
-
     // Remove the quiz from the database
     await quiz.deleteOne();
 
@@ -188,5 +179,59 @@ exports.deleteQuiz = async (req, res) => {
     // Log the error for debugging and send a generic server error message
     console.error("Error deleting quiz:", error);
     res.status(500).json({ message: "Server error while deleting the quiz." });
+  }
+};
+
+/**
+ * @desc    Update an existing quiz
+ * @route   PUT /api/quizzes/:id
+ * @access  Private/Admin
+ */
+exports.updateQuiz = async (req, res) => {
+  try {
+    const { title, questions } = req.body;
+    const quiz = await Quiz.findById(req.params.id);
+
+    if (!quiz) {
+      return res.status(404).json({ message: "Quiz not found" });
+    }
+
+    // --- Add validation, similar to createQuiz ---
+    if (
+      !title ||
+      !questions ||
+      !Array.isArray(questions) ||
+      questions.length === 0
+    ) {
+      return res.status(400).json({
+        message: "Quiz title and at least one question are required.",
+      });
+    }
+
+    for (const q of questions) {
+      if (!q.questionText || !q.options || !q.correctAnswer || !q.timer) {
+        return res.status(400).json({
+          message:
+            "Each question must have text, options, a correct answer, and a timer.",
+        });
+      }
+      // Ensure the correct answer is actually one of the options provided
+      if (!q.options.includes(q.correctAnswer)) {
+        return res.status(400).json({
+          message: `The correct answer for question "${q.questionText}" must be one of the provided options.`,
+        });
+      }
+    }
+    // --- End of validation ---
+
+    // Update the quiz fields
+    quiz.title = title;
+    quiz.questions = questions;
+
+    const updatedQuiz = await quiz.save();
+    res.status(200).json(updatedQuiz);
+  } catch (error) {
+    console.error("Error updating quiz:", error);
+    res.status(500).json({ message: "Server error while updating quiz." });
   }
 };
