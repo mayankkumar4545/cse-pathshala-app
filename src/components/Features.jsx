@@ -1,5 +1,4 @@
 import React from "react";
-import { useInView } from "react-intersection-observer";
 import "./Features.css"; // Your existing CSS file is correct
 
 // Updated data for all four feature cards
@@ -7,102 +6,84 @@ const featureData = [
   {
     icon: "bi bi-person-video3",
     title: "Guest Expert Sessions",
-    text: "Be motivated to learn by the best guest speakers, who are regarded as being rich in both academic and ad industry experience in the augmentation of each course.",
+    text: "Get pumped to learn from the best in the biz! Our guest speakers aren’t just book-smart – they’ve got the street cred too, with serious experience in both academia and the ad industry. Every session is packed with real talk, fresh insights, and that extra spark to level up each course like a pro.",
     color: "green",
   },
   {
     icon: "bi bi-reception-4",
     title: "Live Sessions",
-    text: "Interact with our master trainers in 100% live classes, where you have the advantage to discuss in real time and with one on one instructions make your learning experience exciting. refine your knowledge through exciting debates, Q/Asessions, and practical exercises, build up partnerships and enhance learning experience.",
+    text: "Say goodbye to boring pre-recorded lectures! Dive into 100% live classes with our master trainers, where real-time interaction keeps things buzzing. Ask questions, get instant feedback, and enjoy one-on-one guidance that makes learning anything but dull. Sharpen your skills through fun debates, lively Q&A sessions, and hands-on exercises. Plus, connect with fellow learners, build cool collaborations, and turn every session into an exciting learning adventure.",
     color: "pink",
   },
   {
     icon: "bi bi-kanban",
     title: "Projects",
-    text: "Practice what you learn in real life on real life projects, and critiques of the projects will be judged non your projects and their effects",
+    text: "Time to turn theory into action! Apply what you learn on real-life projects that mirror real-world challenges. No boring exams here — your skills will be judged based on what you build, how it works, and the impact it creates. Get ready for hands-on experience, honest feedback, and the thrill of creating something that actually matters.",
     color: "blue",
   },
   {
     icon: "bi bi-trophy",
     title: "Scholarship and Rewards",
-    text: "Motivation and achievement shall encourage you to do your best with a 50 % grant to future courses and cash bonuses to the top 3% students.",
+    // MODIFICATION: The text is now an array to handle the colored span
+    text: [
+      "Hard work pays off — literally! To keep you hustling, we offer a 50% grant on future courses and exciting cash bonuses for the top 3% performers. It’s our way of saying, “",
+      "You crushed it!",
+      "”  So stay motivated, aim high, and let your achievements unlock some serious rewards.",
+    ],
     color: "yellow",
   },
 ];
 
-// A new, smaller component to handle the animation for each individual card
-const AnimatedFeatureCard = ({ feature, index }) => {
-  const { ref, inView } = useInView({
-    triggerOnce: false, // Re-triggers animation on each scroll
-    threshold: 0.2, // Animate when 20% of the card is visible
-  });
-
-  // Alternate animation direction based on card index (even/odd)
-  const animationClass =
-    index % 2 === 0 ? "animate-slide-left" : "animate-slide-right";
-
+const FeatureCard = ({ feature, index }) => {
   return (
     <div
-      ref={ref}
-      className={`feature-card card-${feature.color} ${
-        inView ? animationClass : ""
-      }`}
-      style={{ animationDelay: "0.1s" }} // A subtle delay for all cards
+      className={`feature-card card-${feature.color}`}
+      style={{ animationDelay: "0.1s" }}
     >
       <div className={`icon-circle icon-${feature.color}`}>
         <i className={feature.icon}></i>
       </div>
       <div className="feature-content">
         <h3 className="feature-name">{feature.title}</h3>
-        <p className="feature-text">{feature.text}</p>
+        {/* MODIFICATION: This now handles both strings and the array format */}
+        <p className="feature-text">
+          {Array.isArray(feature.text) ? (
+            <>
+              {feature.text[0]}
+              <span style={{ color: "#f57c4a", fontWeight: "600" }}>
+                {feature.text[1]}
+              </span>
+              {feature.text[2]}
+            </>
+          ) : (
+            feature.text
+          )}
+        </p>
       </div>
     </div>
   );
 };
 
 const Features = () => {
-  // A separate trigger for the header section
-  const { ref: headerRef, inView: headerInView } = useInView({
-    triggerOnce: false,
-    threshold: 0.2,
-  });
-
   return (
     <section className="features-section">
       <div className="container">
-        {/* Main Title with its own animation trigger */}
-        <div ref={headerRef} className="features-title-container text-center">
-          {/* The h2 and p tags will animate based on the headerInView state */}
-          <h2
-            className={`features-title ${
-              headerInView ? "animate-slide-down" : ""
-            }`}
-          >
+        <div className="features-title-container text-center">
+          <h2 className="features-title">
             Online Classes For{" "}
             <span className="highlight">Remote Learning.</span>
           </h2>
-          <p
-            className={`features-subtitle ${
-              headerInView ? "animate-slide-left" : ""
-            }`}
-            style={{ animationDelay: "0.2s" }}
-          >
+          <p className="features-subtitle" style={{ animationDelay: "0.2s" }}>
             Experienced and Certified Trainers: Gain valuable insights from
             certified trainers with extensive experience who understand both
             academic and industry requirements.
           </p>
         </div>
 
-        {/* Feature Cards */}
         <div className="row justify-content-center">
           <div className="col-lg-9">
             {featureData.map((feature, index) => (
-              // Render the new animated card component for each feature
-              <AnimatedFeatureCard
-                key={index}
-                feature={feature}
-                index={index}
-              />
+              <FeatureCard key={index} feature={feature} index={index} />
             ))}
           </div>
         </div>

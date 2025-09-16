@@ -1,23 +1,14 @@
 import React from "react";
-import { useInView } from "react-intersection-observer";
-import "./WhyChoose.css"; // Using the updated CSS below
+// import { useInView } from "react-intersection-observer"; // Animation removed
+import "./WhyChoose.css";
 import chooseUsImage from "/assets/hero-banner.jpeg";
 
-// Sub-component for the animated header
-const AnimatedHeader = () => {
-  const { ref, inView } = useInView({
-    triggerOnce: false,
-    threshold: 0.5,
-  });
-
+// Sub-component for the header
+const Header = () => {
   return (
-    <div ref={ref} className="row justify-content-center">
+    <div className="row justify-content-center">
       <div className="col-lg-8">
-        <div
-          className={`section-title-container ${
-            inView ? "animate-fade-in-up" : ""
-          }`}
-        >
+        <div className="section-title-container">
           <h2 className="section-title">
             Why Choose <span className="bright-sub-head"> CSE PATHSHALA?</span>
           </h2>
@@ -27,20 +18,11 @@ const AnimatedHeader = () => {
   );
 };
 
-// Sub-component for the animated image
-const AnimatedImage = () => {
-  const { ref, inView } = useInView({
-    triggerOnce: false,
-    threshold: 0.25,
-  });
-
+// Sub-component for the image
+const Image = () => {
   return (
-    <div ref={ref} className="col-lg-6">
-      <div
-        className={`choose-us-image-wrapper ${
-          inView ? "animate-slide-in-left" : ""
-        }`}
-      >
+    <div className="col-lg-6">
+      <div className="choose-us-image-wrapper">
         <img
           src={chooseUsImage}
           alt="Teacher helping a child"
@@ -52,31 +34,28 @@ const AnimatedImage = () => {
   );
 };
 
-// Sub-component for the animated text
-const AnimatedText = () => {
-  const { ref, inView } = useInView({
-    triggerOnce: false,
-    threshold: 0.25,
-  });
-
+// Sub-component for the text
+const Text = () => {
   return (
-    <div ref={ref} className="col-lg-6">
-      <div
-        className={`choose-us-text-wrapper ${
-          inView ? "animate-slide-in-right" : ""
-        }`}
-      >
+    <div className="col-lg-6">
+      <div className="choose-us-text-wrapper">
         <p>
-          CSE Pathshala is not a learning platform and it is your tech career
-          launchpad. Being a learner who wants to learn the basics of coding, a
-          competitive exam or those advanced topics like DSA, Artificial
-          Intelligence or Web Development, we have it all for every level, and
-          curated content is student friendly. <br />
-          Judged by actual projects, personal doubt-breaking, special doubts
-          classes, reverse assessments, and superior mentors, CSE Pathshala sets
-          you not to learn but to progress. Be part of a community, grow, code,
-          and leave a legacy as a creator of future technology leaders. <br />
-          Select CSE Pathshala – because your success in tech begins here.
+          CSE Pathshala is not just a learning platform – it's your ultimate
+          tech career launchpad. Whether you're a beginner eager to learn the
+          basics of coding, preparing for competitive exams, or diving into
+          advanced topics like Data Structures and Algorithms, Artificial
+          Intelligence, or Web Development, we have something for everyone. Our
+          curated content is designed to be student-friendly and easy to follow
+          at every level.
+          <br />
+          At CSE Pathshala, you're not judged by marks but by what you create.
+          With real-world projects, personal doubt-solving sessions, dedicated
+          doubt classes, reverse assessments, and guidance from expert mentors,
+          we focus not just on learning but on real progress.
+          <br />
+          Be part of a community where you grow, code, and build a legacy as a
+          future technology leader. Choose CSE Pathshala – because your success
+          in tech begins here.
         </p>
       </div>
     </div>
@@ -87,16 +66,10 @@ const WhyChoose = () => {
   return (
     <section className="why-choose-section pt-3">
       <div className="container">
-        {/* Animated Section Title */}
-        <AnimatedHeader />
-
-        {/* Content Row */}
+        <Header />
         <div className="row align-items-center">
-          {/* Left Column: Animated Image */}
-          <AnimatedImage />
-
-          {/* Right Column: Animated Text */}
-          <AnimatedText />
+          <Image />
+          <Text />
         </div>
       </div>
     </section>

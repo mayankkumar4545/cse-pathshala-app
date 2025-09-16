@@ -1,5 +1,4 @@
 import React from "react";
-import { useInView } from "react-intersection-observer";
 import "./Testimonials.css"; // Make sure to use the updated CSS below
 
 // Sample data for the testimonials
@@ -37,22 +36,9 @@ const testimonialsData = [
 ];
 
 // A new component to handle the animation for each individual card
-const AnimatedCard = ({ testimonial, index }) => {
-  const { ref, inView } = useInView({
-    triggerOnce: false, // Animation re-triggers on scroll
-    threshold: 0.2, // Card is 20% visible
-  });
-
-  const direction =
-    index % 2 === 0 ? "animate-slide-left" : "animate-slide-right";
-
+const Card = ({ testimonial, index }) => {
   return (
-    <div
-      ref={ref}
-      className={`col-lg-6 mb-4 testimonial-card-wrapper ${
-        inView ? direction : ""
-      }`}
-    >
+    <div className="col-lg-6 mb-4 testimonial-card-wrapper">
       <div className="testimonial-card">
         <div className="testimonial-quote-icon">“</div>
         <div className="testimonial-header">
@@ -80,21 +66,10 @@ const AnimatedCard = ({ testimonial, index }) => {
 };
 
 const Testimonials = () => {
-  const { ref: headerRef, inView: headerInView } = useInView({
-    triggerOnce: false,
-    threshold: 0.2,
-  });
-
   return (
     <div className="testimonials-section">
       <div className="container">
-        {/* Section Header with updated, specific class names */}
-        <div
-          ref={headerRef}
-          className={`testimonials-header-block text-center ${
-            headerInView ? "animate-slide-up" : ""
-          }`}
-        >
+        <div className="testimonials-header-block text-center">
           <h2 className="testimonials-title">
             Real <span className="highlight-text">Stories,</span> Real{" "}
             <span className="highlight-text"> Growth</span>
@@ -105,10 +80,9 @@ const Testimonials = () => {
           </p>
         </div>
 
-        {/* Testimonials Grid */}
         <div className="row">
           {testimonialsData.map((testimonial, index) => (
-            <AnimatedCard key={index} testimonial={testimonial} index={index} />
+            <Card key={index} testimonial={testimonial} index={index} />
           ))}
         </div>
       </div>

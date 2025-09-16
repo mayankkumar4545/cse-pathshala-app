@@ -31,7 +31,7 @@ body {
 .begin-learning-btn,
 .play-btn-circle,
 .stat-item {
-  opacity: 0;
+  /* opacity: 0; */ /* Disabled for static view */
   will-change: transform, opacity;
 }
 

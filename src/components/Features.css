@@ -10,7 +10,6 @@
 .features-title-container {
   text-align: center;
   margin-bottom: 3.5rem;
-  /* Opacity removed from here */
 }
 
 .features-title {
@@ -18,7 +17,7 @@
   font-weight: 800;
   color: #2f2f2f;
   margin-bottom: 1rem;
-  opacity: 0; /* Starts hidden for animation */
+  /* opacity: 0; */ /* Starts hidden for animation */
 }
 
 .features-title .highlight {
@@ -32,7 +31,7 @@
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.7;
-  opacity: 0; /* Starts hidden for animation */
+  /* opacity: 0; */ /* Starts hidden for animation */
 }
 
 /* --- Feature Card Styling --- */
@@ -43,7 +42,7 @@
   border-radius: 20px;
   margin-bottom: 1.5rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  opacity: 0; /* Hidden for animation */
+  /* opacity: 0; */ /* Hidden for animation */
 }
 
 .feature-card:hover {

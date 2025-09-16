@@ -10,7 +10,7 @@
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 1rem;
-  opacity: 0;
+  /* opacity: 0; */
 }
 
 .popular-courses-subtitle {
@@ -32,11 +32,11 @@
   border: none;
   border-top: 2px solid #fdeee2;
   margin-bottom: 3rem;
-  opacity: 0;
+  /* opacity: 0; */
 }
 
 .course-card-wrapper {
-  opacity: 0;
+  /* opacity: 0; */
 }
 
 .popular-course-card {

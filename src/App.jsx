@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop"; // 1. Import the new component
 
 // --- Import Layouts ---
 import MainLayout from "./MainLayout";
@@ -18,14 +19,17 @@ import Contact from "./components/Contact";
 import QuizLobby from "./components/QuizLobby";
 import QuizAttempt from "./components/QuizAttempt";
 import QuizResult from "./components/QuizResult";
-import MyResults from "./components/MyResults"; // 1. Import MyResults
-import Leaderboard from "./components/Leaderboard"; // 2. Import Leaderboard
+import MyResults from "./components/MyResults";
+import Leaderboard from "./components/Leaderboard";
+import BlogPage from "./components/BlogPage";
+import BlogListPage from "./components/BlogListPage";
 
 import "./App.css";
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop /> {/* 2. Place the component here */}
       <div className="page-container">
         <Routes>
           {/* --- Routes WITH Main Navbar & Footer --- */}
@@ -36,12 +40,13 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/course/:courseId" element={<CourseDetailPage />} />
             <Route path="checkout/:courseId" element={<CheckoutPage />} />
+            <Route path="/blog/:id" element={<BlogPage />} />
+            <Route path="/blogs" element={<BlogListPage />} />
           </Route>
 
           {/* --- Routes WITH the Quiz Sidebar Layout --- */}
           <Route path="/quiz" element={<QuizLayout />}>
             <Route index element={<QuizLobby />} />
-            {/* 3. Add the routes for the new pages */}
             <Route path="my-results" element={<MyResults />} />
             <Route path="leaderboard" element={<Leaderboard />} />
           </Route>

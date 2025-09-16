@@ -1,0 +1,105 @@
+.blog-page-container {
+  font-family: "Poppins", sans-serif;
+}
+
+.blog-page-header {
+  height: 40vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+.blog-page-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.blog-page-header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.blog-page-content {
+  max-width: 800px;
+  margin: -4rem auto 4rem auto;
+  background: white;
+  border-radius: 15px;
+  padding: 2.5rem;
+  position: relative;
+  z-index: 3;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.author-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.author-info strong {
+  font-size: 1.1rem;
+}
+.author-info p {
+  margin: 0;
+  color: #777;
+}
+
+/* Styles for the rendered HTML from the editor */
+.blog-body {
+  line-height: 1.8;
+  color: #333;
+}
+.blog-body h1,
+.blog-body h2,
+.blog-body h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+.blog-body p {
+  margin-bottom: 1.5rem;
+}
+.blog-body a {
+  color: #f57c4a;
+  text-decoration: underline;
+}
+.blog-body blockquote {
+  border-left: 4px solid #f57c4a;
+  padding-left: 1rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: #555;
+}
+.blog-body ul,
+.blog-body ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.back-to-blogs-link {
+  display: inline-block;
+  margin-top: 2rem;
+  color: #f57c4a;
+  font-weight: 600;
+}

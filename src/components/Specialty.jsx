@@ -1,95 +1,88 @@
 import React from "react";
-import { useInView } from "react-intersection-observer";
-import "./Specialty.css"; // Your existing CSS file is correct
+import "./Specialty.css";
 
-// Data for the specialty cards
 const specialtyData = [
   {
     icon: "bi bi-people-fill",
     title: "Best Tutors",
-    text: "The best tutor is someone who can connect with their students and motivate them to achieve their goals. They have a deep understanding of the subject matter and can explain...",
+    text: "The best tutors aren’t just brainy — they get you. They know how to turn tricky topics into simple ideas, tough days into breakthroughs, and doubts into confidence. With mad subject knowledge and a vibe that keeps you hooked, our tutors aren’t here just to teach — they’re here to inspire. Whether it’s coding, cracking concepts, or chasing goals, they’ve got your back all the way.",
     color: "yellow",
   },
   {
     icon: "bi bi-mortarboard-fill",
     title: "Best Curriculum",
-    text: "The best curriculum is one that is well-designed, comprehensive, and flexible. It should provide a solid foundation of knowledge and skills, while also allowing for exploration and creativity...",
+    text: "A killer curriculum isn’t just about books — it’s a blend of brains, balance, and bold ideas. Ours is designed to be rock-solid yet flexible, giving you the core skills you need and the freedom to explore your tech creativity. Whether you're starting with the basics or diving into advanced stuff, our content grows with you — smart, smooth, and seriously next-level.",
     color: "pink",
   },
   {
     icon: "bi bi-patch-check-fill",
     title: "Certificate",
-    text: "Certificate programs in creative thinking can provide individuals with the knowledge and skills needed to generate innovative solutions, challenge assumptions, and drive positive...",
+    // MODIFICATION: Text is now an array to handle the colored span
+    text: [
+      `More than just paper — it's proof you’ve got the skills to think big, break barriers, and build bold solutions. Our certificates aren’t just for show — they’re earned by those who challenge norms, spark creativity, and bring real impact. Walk away not just with knowledge, but with a badge that says, "`,
+      "I’m ready to innovate and lead.",
+      `"`,
+    ],
     color: "green",
   },
   {
     icon: "bi bi-lightbulb-fill",
     title: "Creative Thinking",
-    text: "Creative thinking is an essential skill that allows individuals to generate innovative ideas, solve complex problems, and think outside of the box. Certificate programs that focus...",
+    text: "It’s not just about thinking outside the box — it’s about realizing there is no box. Creative thinking fuels innovation, unlocks bold ideas, and turns challenges into opportunities. At CSE Pathshala, we spark that mindset through hands-on learning that pushes boundaries. Whether you're solving tough problems or building the next big thing, creative thinking is your ultimate power tool — and we’re here to sharpen it.",
     color: "blue",
   },
 ];
 
-// A new, smaller component to handle the animation for each individual card
-const AnimatedCard = ({ item, index }) => {
-  const { ref, inView } = useInView({
-    triggerOnce: false, // Animation re-triggers on every scroll
-    threshold: 0.2, // Animate when 20% of the card is visible
-  });
-
+const Card = ({ item, index }) => {
   return (
     <div
-      ref={ref}
-      className={`col-lg-3 col-md-6 specialty-card-wrapper ${
-        inView ? "animate-slide-up-right" : ""
-      }`}
-      style={{ animationDelay: `${0.1 * index}s` }} // Keep a slight stagger
+      className="col-lg-3 col-md-6 specialty-card-wrapper"
+      style={{ animationDelay: `${0.1 * index}s` }}
     >
       <div className="specialty-card">
         <div className={`specialty-icon-circle icon-bg-${item.color}`}>
           <i className={item.icon}></i>
         </div>
         <h3 className="specialty-card-title">{item.title}</h3>
-        <p className="specialty-card-text">{item.text}</p>
+        {/* MODIFICATION: This now handles both strings and the array format */}
+        <p className="specialty-card-text">
+          {Array.isArray(item.text) ? (
+            <>
+              {item.text[0]}
+              <span style={{ color: "#f57c4a", fontWeight: "600" }}>
+                {item.text[1]}
+              </span>
+              {item.text[2]}
+            </>
+          ) : (
+            item.text
+          )}
+        </p>
       </div>
     </div>
   );
 };
 
 const Specialty = () => {
-  // A separate trigger just for the header section
-  const { ref: headerRef, inView: headerInView } = useInView({
-    triggerOnce: false,
-    threshold: 0.2,
-  });
-
   return (
     <section className="specialty-section">
       <div className="container">
-        {/* Main Title Container with its own animation trigger */}
-        <div ref={headerRef} className="specialty-title-container">
-          <h4
-            className={`specialty-subtitle ${
-              headerInView ? "animate-slide-down" : ""
-            }`}
-          >
-            We Are Different
-          </h4>
-          <h2
-            className={`specialty-title ${
-              headerInView ? "animate-slide-left" : ""
-            }`}
-            style={{ animationDelay: "0.1s" }} // Slight delay for the main title
-          >
-            What Makes Us Different From Others And What Is Our Specialty?
+        <div className="specialty-title-container">
+          <h4 className="specialty-subtitle">Not Your Regular Classroom</h4>
+
+          <h2 className="specialty-title" style={{ animationDelay: "0.1s" }}>
+            Why We’re Not Just Another Tech Stop?
           </h2>
+          <h4 className="specialty-subtitle">
+            Because boring classes are out, and brain-boosting, project-packed,
+            mentor-fueled learning is in. We serve tech with a twist — fun,
+            fearless, and future-ready.
+          </h4>
         </div>
 
-        {/* Specialty Cards Grid */}
         <div className="row">
           {specialtyData.map((item, index) => (
-            // Render the new animated card component
-            <AnimatedCard key={index} item={item} index={index} />
+            <Card key={index} item={item} index={index} />
           ))}
         </div>
       </div>

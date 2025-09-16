@@ -4,7 +4,8 @@ import "./AdminDashboard.css";
 import ManageVideos from "./ManageVideos";
 import ManageMaterials from "./ManageMaterials";
 import ManageQuizzes from "./ManageQuizzes";
-import ManageResults from "./ManageResults"; // 1. Import the new component
+import ManageResults from "./ManageResults";
+import ManageBlogs from "./ManageBlogs"; // 1. Import the new component
 
 const AdminDashboard = () => {
   const [activeView, setActiveView] = useState("videos");
@@ -16,7 +17,6 @@ const AdminDashboard = () => {
     navigate("/login");
   };
 
-  // 2. Add the new component to the render logic
   const renderContent = () => {
     switch (activeView) {
       case "videos":
@@ -26,13 +26,14 @@ const AdminDashboard = () => {
       case "quizzes":
         return <ManageQuizzes />;
       case "results":
-        return <ManageResults />; // Add the new case
+        return <ManageResults />;
+      case "blogs": // 2. Add the new case
+        return <ManageBlogs />;
       default:
         return <ManageVideos />;
     }
   };
 
-  // 3. Add the new navigation item
   const navItems = [
     {
       id: "home",
@@ -56,6 +57,11 @@ const AdminDashboard = () => {
       id: "results",
       icon: "bi-bar-chart-line-fill",
       label: "Manage Results",
+    },
+    {
+      id: "blogs", // 3. Add the new navigation item
+      icon: "bi-pencil-square",
+      label: "Manage Blogs",
     },
   ];
 

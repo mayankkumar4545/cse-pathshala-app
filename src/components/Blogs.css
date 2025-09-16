@@ -20,10 +20,6 @@
   background-color: #ffecd5;
   z-index: -1; /* Places the shape behind the content */
 
-  /* THIS IS THE FIX:
-    The percentages are decreased to move the line higher up.
-    It now starts 35% down on the left and 20% down on the right.
-  */
   clip-path: polygon(0 15%, 100% 3%, 100% 100%, 0% 100%);
 }
 
@@ -32,7 +28,7 @@
 .blog-card,
 .decorative-star,
 .view-all-btn {
-  opacity: 0;
+  /* opacity: 0; */
   will-change: transform, opacity;
 }
 
@@ -142,7 +138,6 @@
 /* --- Responsive Adjustments --- */
 @media (max-width: 991.98px) {
   .blogs-section::before {
-    /* Adjust shape for tablets */
     clip-path: polygon(0 40%, 100% 25%, 100% 100%, 0% 100%);
   }
 }
@@ -155,7 +150,6 @@
     padding-bottom: 4rem;
   }
   .blogs-section::before {
-    /* On mobile, make it a simpler shape */
     clip-path: polygon(0 60%, 100% 50%, 100% 100%, 0% 100%);
   }
 }

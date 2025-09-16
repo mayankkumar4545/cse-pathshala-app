@@ -10,7 +10,7 @@
 .specialty-subtitle,
 .specialty-title,
 .specialty-card-wrapper {
-  opacity: 0;
+  /* opacity: 0; */ /* Disabled for static view */
 }
 
 /* --- Title Styling --- */

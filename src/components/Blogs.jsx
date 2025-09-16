@@ -1,109 +1,54 @@
-import React from "react";
-import { useInView } from "react-intersection-observer";
-import "./Blogs.css"; // We'll create this CSS file next
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import BlogCard from "./BlogCard";
+import "./Blogs.css";
 
-// --- Sample Data for Blog Posts ---
-const blogData = [
-  {
-    image: "https://placehold.co/600x400/E0E0E0/333?text=Blog+1",
-    title: "Mastering DSA: The Building Blocks of Every Great Developer",
-    text: "Unlock the core concepts of Data Structures and Algorithms with practical examples and student-friendly tips. Learn how mastering DSA can sharpen your logic, improve your coding interviews, and open doors to top tech roles.",
-  },
-  {
-    image: "https://placehold.co/600x400/E0E0E0/333?text=Blog+2",
-    title: "How to Stay Consistent in Coding While Managing College Pressure",
-    text: "Balancing academics and coding practice is tough — but doable. Discover effective strategies for time management, focused learning, and building a sustainable tech routine without burnout.",
-  },
-  {
-    image: "https://placehold.co/600x400/E0E0E0/333?text=Blog+3",
-    title: "Why Every CSE Student Should Build Real-World Projects Early",
-    text: "Theory matters, but projects prove your skills. This blog explores how working on real-world applications can accelerate your growth, boost confidence, and make your resume stand out — even before you graduate.",
-  },
-];
+const API_URL = "http://localhost:5000/api/blogs";
 
-// --- Individually Animated Components ---
-
-// Animated Header
-const AnimatedHeader = () => {
-  const { ref, inView } = useInView({ triggerOnce: false, threshold: 0.5 });
-  return (
-    <div
-      ref={ref}
-      className={`blogs-header ${inView ? "animate-slide-up" : ""}`}
-    >
-      <h2 className="blogs-title">Blogs</h2>
-    </div>
-  );
-};
-
-// Animated Blog Card
-const AnimatedBlogCard = ({ post, index }) => {
-  const { ref, inView } = useInView({ triggerOnce: false, threshold: 0.2 });
-  return (
-    <div
-      ref={ref}
-      className="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch"
-    >
-      <div
-        className={`blog-card ${inView ? "animate-slide-up" : ""}`}
-        style={{ animationDelay: `${index * 0.1}s` }}
-      >
-        <img src={post.image} alt={post.title} className="blog-card-image" />
-        <div className="blog-card-body">
-          <h5 className="blog-card-title">{post.title}</h5>
-          <p className="blog-card-text">{post.text}</p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Animated Decorative Star
-const AnimatedStar = () => {
-  const { ref, inView } = useInView({ triggerOnce: false, threshold: 0.8 });
-  return (
-    <div
-      ref={ref}
-      className={`decorative-star ${inView ? "animate-slide-up" : ""}`}
-    >
-      *
-    </div>
-  );
-};
-
-// Animated "View All" Button
-const AnimatedButton = () => {
-  const { ref, inView } = useInView({ triggerOnce: false, threshold: 0.8 });
-  return (
-    <div
-      ref={ref}
-      className={`text-center mt-4 ${inView ? "animate-slide-up" : ""}`}
-    >
-      <button className="btn view-all-btn">View All</button>
-    </div>
-  );
-};
-
-// --- Main Blogs Component ---
 const Blogs = () => {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        // This line shows only the 3 most recent blog posts
+        setBlogs(data.slice(0, 3));
+      } catch (error) {
+        console.error("Failed to fetch blogs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBlogs();
+  }, []);
+
   return (
     <section className="blogs-section">
       <div className="container">
-        {/* Animated Header */}
-        <AnimatedHeader />
-
-        {/* Blog Cards Grid */}
-        <div className="row justify-content-center">
-          {blogData.map((post, index) => (
-            <AnimatedBlogCard key={index} post={post} index={index} />
-          ))}
+        <div className="blogs-header">
+          <h2 className="blogs-title">From the Blog</h2>
         </div>
 
-        {/* Animated Decorative Star */}
-        <AnimatedStar />
+        <div className="row justify-content-center">
+          {loading ? (
+            <p>Loading posts...</p>
+          ) : blogs.length > 0 ? (
+            blogs.map((post) => <BlogCard key={post._id} post={post} />)
+          ) : (
+            // This is shown if there are no posts in the database
+            <p>No blog posts have been published yet. Check back soon!</p>
+          )}
+        </div>
 
-        {/* Animated "View All" Button */}
-        <AnimatedButton />
+        <div className="text-center mt-4">
+          {/* This button correctly links to the /blogs page */}
+          <Link to="/blogs" className="btn view-all-btn">
+            View All Posts
+          </Link>
+        </div>
       </div>
     </section>
   );

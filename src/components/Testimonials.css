@@ -7,19 +7,17 @@
 }
 
 /* --- Elements start hidden for animation --- */
-.testimonials-header-block, /* Updated selector */
+.testimonials-header-block,
 .testimonial-card-wrapper {
-  opacity: 0;
+  /* opacity: 0; */
 }
 
 /* --- Updated Header Block --- */
 .testimonials-header-block {
-  /* Updated selector */
   margin-bottom: 4rem;
 }
 
 .testimonials-title {
-  /* Updated selector */
   font-size: 2.5rem;
   font-weight: 700;
   color: #1e2a4c;
@@ -30,7 +28,6 @@
 }
 
 .testimonials-subtitle {
-  /* Updated selector */
   font-size: 1.1rem;
   color: #5a6472;
   margin-top: 0.5rem;
